@@ -37,7 +37,7 @@ The full list of contributors for ClassRepo can be found https://cs2113-ay1819s1
 
 == Acknowledgements
 
-This application was adapted from AddressBook-Level 3 by se-edu https://github.com/nusCS2113-AY1819S1/addressbook-level3[here].
+This application was adapted from AddressBook-Level 3 by se-edu https://github.com/se-edu/addressbook-level3[here].
 
 == Contact Us
 
