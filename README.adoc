@@ -33,12 +33,11 @@ image::UiNew.png[]
 
 == Contributors
 
-The full list of contributors for se-edu can be found https://se-edu.github.io/Team.html[here].
+The full list of contributors for ClassRepo can be found https://cs2113-ay1819s1-f10-1.github.io/main/AboutUs.html[here].
 
 == Acknowledgements
 
-Some parts of this sample application was inspired by the excellent
-http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by Marco Jakob
+This application was adapted from AddressBook-Level 3 by se-edu https://github.com/nusCS2113-AY1819S1/addressbook-level3[here].
 
 == Contact Us
 
