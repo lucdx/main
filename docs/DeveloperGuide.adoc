@@ -438,13 +438,25 @@ An Example of how command 1 - `Editing the Fee of a Person` works:
 * **Alternative 1 (current choice):** Instantiate Fee attribute under each Person created in the Person Class.
 ** Pros: Allow us to skip the need for another data Class to be saved into any of the storage files, therefore being more convenient and reducing the number of files and Books. +
 ** Cons: May get messy with more data manipulation of the Fees attribute when printing/sorting.
-* **Alternative 2:** Use an enum to indicate the current access level. List of allowed commands will be generated base on the value of this enum.
-** Pros: Does not require a separate class to represent the different access levels.
-** Cons: Difficult to maintain the list of allowed commands.
-* **Alternative 3:** Use a String to determine the Privilege level.
+* **Alternative 2:** Use a seperate date file 'FeesBook' to keep track of each Person and their respective fees.
+** Pros: Data independency and hence no conflict during data manipulation.
+** Cons: Cluttered as there may be too many data Books just to track an attribute.
+* **Alternative 3:** A compulsory attribute under Person Class hence occupying a data field in the input for AddPersonCommand.
 ** Pros: Easy to implement and parse.
-** Cons: Very prone to undetected bugs, like mispelling the Privilege levels.
+** Cons: Input for Add Command would be too long as it will have too many data entry points.
 
+===== Aspect: How to List fees of everyone
+//Not for long
+* **Alternative 1 (current choice):** Loop through the InternalList created and prints every Person's name and Fees
+** Pros: Easy to implement.
+** Cons: Does not allow for much data manipulation of the list such as sorting.
+//TODO
+* **Alternative 2:**
+** Pros:
+** Cons: 
+* **Alternative 3:**
+** Pros:
+** Cons:
 // end::Fees[]
 
 == Documentation
