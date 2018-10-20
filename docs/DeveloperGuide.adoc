@@ -414,6 +414,39 @@ An Example of how feature 2 - `Adding a new assessment to the AddressBook` works
   grades to a particular student.
 // end::Grades[]
 
+// tag::Fees[]
+=== Fees Feature
+
+==== Current Implementation
+A private attribute under the Person class is initialised when a Person is added to the AddressBook. This attribute holds 2 Strings, one being the monetary value of
+the fee and the other being the due date for the respective fee. The current set of commands include:
+
+. `Editing a Fee`
+. `Viewing Fee of a Person`
+. `Listing all Fees`
+//TODO implement list and tracking feature. Also may update addfeees command to be edit instead.
+
+An Example of how command 1 - `Editing the Fee of a Person` works:
+
+. The admin will be able to use the 'addfees' command to add a new fee to the Person.
+. The existing fee with its date will be replaced by this new value in the Person object in the AddressBook.
+. The updated fees will then be store in the AddressBook and will be automatically private, only viewable by the admin.
+
+==== Design Considerations
+
+===== Aspect: How to define a Fee for each Person
+* **Alternative 1 (current choice):** Instantiate Fee attribute under each Person created in the Person Class.
+** Pros: Allow us to skip the need for another data Class to be saved into any of the storage files, therefore being more convenient and reducing the number of files and Books. +
+** Cons: May get messy with more data manipulation of the Fees attribute when printing/sorting.
+* **Alternative 2:** Use an enum to indicate the current access level. List of allowed commands will be generated base on the value of this enum.
+** Pros: Does not require a separate class to represent the different access levels.
+** Cons: Difficult to maintain the list of allowed commands.
+* **Alternative 3:** Use a String to determine the Privilege level.
+** Pros: Easy to implement and parse.
+** Cons: Very prone to undetected bugs, like mispelling the Privilege levels.
+
+// end::Fees[]
+
 == Documentation
 
 We use asciidoc for writing documentation.
