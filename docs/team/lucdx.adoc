@@ -35,7 +35,7 @@ Under this project, I serve as the Scribe, monitoring all the documentation rela
 **** TBC
 **** TBC
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-F10-1/main/pull/86[TBC]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-F10-1/main/pull/86[#86]
 
 == Contributions to the User Guide
 
@@ -44,11 +44,11 @@ Under this project, I serve as the Scribe, monitoring all the documentation rela
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-== Contributions to the Developer Guide
-
 <<../UserGuide.adoc#fees,Fees Section>> +
 
-include::../UserGuide.adoc[tag=fees]
+include::../UserGuide.adoc[tag=Fees]
+
+== Contributions to the Developer Guide
 
 |===
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
@@ -56,4 +56,4 @@ include::../UserGuide.adoc[tag=fees]
 
 <<./DeveloperGuide.adoc#fees,Implementation of Fees>>
 
-include::../DeveloperGuide.adoc[tag=fees]
+include::../DeveloperGuide.adoc[tag=Fees]

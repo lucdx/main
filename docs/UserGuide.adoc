@@ -389,6 +389,7 @@ Clears all entries from the exam book. All exams will be cleared in the address 
 Format: `clearexams`
 //end::Exam[]
 
+//tag::Fees[]
 === Fees Commands
 Below are the commands that deals with fees data:
 
@@ -428,6 +429,7 @@ Views fees of the 2nd person in the address book.
 * `find Betsy` +
 `viewall 1` +
 Views fees of the 1st person in the results of the `find` command.
+//end::Fees[]
 
 // tag::account[]
 [[account]]
