@@ -448,7 +448,7 @@ Format: `listdue`
 ****
 Views the fees of all the people with overdue fees.
 Shows only the index, name, fee and due status.
-Adds a "overdue" tag to the people shown for easier tracking in the future.
+Adds a "feesdue" tag to the people shown for easier tracking in the future.
 ****
 
 Examples:
@@ -456,7 +456,7 @@ Examples:
 * `listdue` +
 `viewall 1` +
 Views all information of the 1st person in the results of the `listdue` command. +
-Including the "overdue" tag.
+Including the "feesdue" tag.
 
 //end::Fees[]
 
