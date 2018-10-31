@@ -429,6 +429,35 @@ Views fees of the 2nd person in the address book.
 * `find Betsy` +
 `viewall 1` +
 Views fees of the 1st person in the results of the `find` command.
+
+==== List all fees of every person : `listfees`  image:Admin.png[16,16]
+
+Displays the fees(private) of all the people in the AddressBook. +
+Format: `listfees`
+
+****
+Views the fees of all the people with respect to their INDEX.
+Shows only the index, name and fees.
+****
+
+==== List only people with due fees : `listdue`  image:Admin.png[16,16]
+
+Displays the fees(private) of all the people in the AddressBook with overdue Fees. +
+Format: `listdue`
+
+****
+Views the fees of all the people with overdue fees.
+Shows only the index, name, fee and due status.
+Adds a "overdue" tag to the people shown for easier tracking in the future.
+****
+
+Examples:
+
+* `listdue` +
+`viewall 1` +
+Views all information of the 1st person in the results of the `listdue` command. +
+Including the "overdue" tag.
+
 //end::Fees[]
 
 // tag::account[]
