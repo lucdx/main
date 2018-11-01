@@ -53,7 +53,6 @@ public class TutorUser extends BasicUser {
             new AddGradesCommand(),
             new ViewGradesCommand(),
             new DeleteGradesCommand(),
-            new ListDueFeesCommand(),
             new ViewFeesCommand()
     );
 
