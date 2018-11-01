@@ -390,13 +390,16 @@ Format: `clearexams`
 //end::Exam[]
 
 //tag::Fees[]
+[[Fees]]
 === Fees Commands
 Below are the commands that deals with fees data:
 
-==== Adding fees to a person: `addfees` image:Admin.png[16,16]
+==== Editing fees of a person: `editfees` image:Admin.png[16,16]
 
-Adds a numerical fee to a person in the address book. +
-Format: `add INDEX FEE`
+Edits the numerical fees of a person in the address book. +
+Format: `edit INDEX FEE DUE_DATE` +
+FEE must have the form of 2 decimal places +
+DUE_DATE must have the form of DD-MM-YYYY
 
 ****
 Words in `UPPER_CASE` are the parameters, order of parameters are fixed.
@@ -407,8 +410,9 @@ be seen using the `viewall` command, or for fees specifically, the `viewfees` co
 
 Examples:
 
-* `addfees 1 344.41`
-* `addfees 2 0.60`
+* `list` +
+`editfees 1 344.41 31-10-2018`
+* `editfees 2 0.60 01-01-2019`
 
 ==== View fees of a person : `viewfees`  image:Admin.png[16,16]
 
