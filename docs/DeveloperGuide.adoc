@@ -475,13 +475,13 @@ the fee and the other being the due date for the respective fee. The current set
 . `Editing a Fee`
 . `Viewing Fee of a Person`
 . `Listing all Fees`
-//TODO implement list and tracking feature. Also may update addfeees command to be edit instead.
+. `Listing all Due Fees`
 
 An Example of how command 1 - `Editing the Fee of a Person` works:
 
-. The admin will be able to use the 'addfees' command to add a new fee to the Person.
+. The admin will be able to use the 'editfees' command to add a new fee to the Person.
 . The existing fee with its date will be replaced by this new value in the Person object in the AddressBook.
-. The updated fees will then be store in the AddressBook and will be automatically private, only viewable by the admin.
+. The updated fees will then be store in the AddressBook and will be automatically private, only viewable by the admin and tutors.
 
 ==== Design Considerations
 
@@ -497,17 +497,33 @@ An Example of how command 1 - `Editing the Fee of a Person` works:
 ** Cons: Input for Add Command would be too long as it will have too many data entry points.
 
 ===== Aspect: How to List fees of everyone
-//Not for long
-* **Alternative 1 (current choice):** Loop through the InternalList created and prints every Person's name and Fees
+* **Alternative 1 (current choice):** Shallow copies the internalList of ReadOnlyPerson, sorts the copy with a custom comparator and prints the list,
+showing only name and fees.
+** Pros: Allows for easy sorting and does not manipulate the date in the original internalList.
+** Cons: Does not allow for any data manipulation such as omitting any Person
+* **Alternative 2:** Looping through internalList and printing every name and respective Fee.
 ** Pros: Easy to implement.
-** Cons: Does not allow for much data manipulation of the list such as sorting.
-//TODO
-* **Alternative 2:**
-** Pros:
-** Cons: 
-* **Alternative 3:**
-** Pros:
-** Cons:
+** Cons: Unable to be sorted by the date dues of the Fees of each Person.
+
+===== Aspect: Having another ListDueFeesCommand
+* **Alternative 1 (current choice):** Having another Command which only shows the people that have Fees that are due with respect to
+the current system date.
+** Pros: Clearer presentation of data and specific Persons involved. Ability to add "feesdue" tag to only the people shown.
+** Cons: May seem redundant as these people already appear at the top of ListFeesCommand.
+* **Alternative 2:** Merging it with ListFeesCommand, therefore only have one List Command with respect to Fees.
+** Pros: Less clutter of code.
+** Cons: Inability to show the list of Fees of the Persons whose Fees are not yet due. Restricted in presenting data.
+
+===== Aspect: Using ViewFeesCommand with respect to INDEX
+* **Alternative 1 (current choice):** Follows the other ViewCommands with respect to last INDEX presented following any List Command.
+** Pros: Coherent code template as all ViewCommands follow the INDEXED structure. Ability to be flexible depending on which List Command was
+called beforehand.
+** Cons: May not seem intuitive to view Fee of a specific Person if User only knows Name of the Person, therefore leading to use of the Find
+Command first.
+* **Alternative 2:** Using another parameter such as Name of the Person, instead of INDEX
+** Pros: More intuitive to layman Users.
+** Cons: There may be Persons with identical names, thus resulting in conflicts in ViewCommand.
+
 // end::Fees[]
 
 == Documentation

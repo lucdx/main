@@ -414,7 +414,7 @@ Examples:
 `editfees 1 344.41 31-10-2018`
 * `editfees 2 0.60 01-01-2019`
 
-==== View fees of a person : `viewfees`  image:Admin.png[16,16]
+==== View fees of a person : `viewfees`  image:Tutor.png[16,16]
 
 Displays the fees(private) of the specified person. +
 Format: `viewfees INDEX`
@@ -434,7 +434,7 @@ Views fees of the 2nd person in the address book.
 `viewall 1` +
 Views fees of the 1st person in the results of the `find` command.
 
-==== List all fees of every person : `listfees`  image:Admin.png[16,16]
+==== List all fees of every person : `listfees`  image:Tutor.png[16,16]
 
 Displays the fees(private) of all the people in the AddressBook. +
 Format: `listfees`
@@ -444,7 +444,7 @@ Views the fees of all the people with respect to their INDEX.
 Shows only the index, name and fees.
 ****
 
-==== List only people with due fees : `listdue`  image:Admin.png[16,16]
+==== List only people with due fees : `listdue`  image:Tutor.png[16,16]
 
 Displays the fees(private) of all the people in the AddressBook with overdue Fees. +
 Format: `listdue`
