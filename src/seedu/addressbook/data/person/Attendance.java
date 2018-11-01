@@ -11,37 +11,62 @@ import java.util.Map;
 
 public class Attendance implements Printable {
 
-    /** Represents a map that links dates(kay) to attendance(value)*/
-    private Map<String, Boolean> attendanceMap = new HashMap<>();
+    /** Represents a map for each person, showing which every attendance for each date*/
+    private Map<String, Boolean> attendancePersonMap = new HashMap<>();
 
-    /** Method to add attendance */
+    /** Method to add attendance*/
     public boolean addAttendance(String date, Boolean isPresent, Boolean overWrite) {
         String inputDate = date;
-        if ("0".equals(date)) { //PMD 3.3
+        if ("0".equals(date)) {
             inputDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         }
-        // If there is a duplicate date
-        if (attendanceMap.containsKey(inputDate) && overWrite) {
-            attendanceMap.put(inputDate, isPresent);
+        // return true if duplicate date
+        if (attendancePersonMap.containsKey(inputDate) && overWrite) {
+            attendancePersonMap.put(inputDate, isPresent);
             return true;
-        } else if (attendanceMap.containsKey(inputDate) && !overWrite) {
+        } else if (attendancePersonMap.containsKey(inputDate) && !overWrite) {
             return true;
+        } else if (!attendancePersonMap.containsKey(inputDate) && overWrite) {
+            return false;
         } else {
-            attendanceMap.put(inputDate, isPresent);
+            attendancePersonMap.put(inputDate, isPresent);
             return false;
         }
     }
 
     /** Method to reiterate person's attendance */
     public String viewAttendance() {
-        String output = "";
-        for (Map.Entry entry : attendanceMap.entrySet()) {
-            output += entry.getKey() + " -> " + entry.getValue() + "\n";
+        String output = "Date \t\t Attendance\n";
+        String attendance = "Absent";
+        for (Map.Entry entry : attendancePersonMap.entrySet()) {
+            if (entry.getValue().equals(true)) {
+                attendance = "Present";
+            }
+            output += entry.getKey() + "\t\t" + attendance + "\n";
         }
-        if ("".equals(output)) {
-            output = "NIL";
+        if ("Date \t\t Attendance\n".equals(output)) {
+            output += "NIL\t\t\t NIL";
         }
         return output;
+    }
+
+    /** Method to get attendance of a particular date **/
+    public Boolean viewAttendanceDate(String date) {
+        String lookForDate = date;
+        if ("0".equals(date)) {
+            lookForDate = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+        }
+        Boolean isPresent = attendancePersonMap.get(lookForDate);
+        if (null == isPresent) {
+            return false;
+        } else {
+            return isPresent;
+        }
+    }
+
+    /** Accessor Method **/
+    public Map<String, Boolean> getAttendancePersonMap() {
+        return this.attendancePersonMap;
     }
 
     @Override
@@ -53,9 +78,12 @@ public class Attendance implements Printable {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Attendance // instanceof handles nulls
-                && this.attendanceMap.equals(((Attendance) other).attendanceMap)); // state check
+                && this.attendancePersonMap.equals(((Attendance) other).attendancePersonMap)); // state check
     }
 
-    //TODO store the attendance somewhere (perhaps attendance book?)
+    public boolean isPrivate() {
+        return true;
+    }
+
 }
 

@@ -1,10 +1,12 @@
 package seedu.addressbook.data;
 
+import java.util.List;
 import java.util.Optional;
 
 import seedu.addressbook.data.person.Assessment;
 import seedu.addressbook.data.person.Exam;
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadOnlyExam;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniqueAssessmentsList;
 import seedu.addressbook.data.person.UniqueAssessmentsList.AssessmentNotFoundException;
@@ -127,7 +129,7 @@ public class AddressBook {
      * Removes a particular exam from all persons
      * @param exam the exam
      */
-    public void removeExam(Exam exam) {
+    public void removeExam(ReadOnlyExam exam) {
         allPersons.removeExam(exam);
     }
 
@@ -141,8 +143,15 @@ public class AddressBook {
     /**
      * Loops through the list
      */
-    public String loopFeesPerson(ReadOnlyPerson person) throws PersonNotFoundException {
-        return allPersons.loopFees(person);
+    public List<ReadOnlyPerson> listFeesPerson() {
+        return allPersons.listFees();
+    }
+
+    /**
+     * Loops through the list to get overdue fees
+     */
+    public List<ReadOnlyPerson> dueFeesPerson(String date) {
+        return allPersons.dueFees(date);
     }
 
     /**
@@ -176,6 +185,14 @@ public class AddressBook {
 
     public void setPermAdmin(boolean permAdmin) {
         isPermAdmin = permAdmin;
+    }
+
+    public List getPresentPeople(String date) {
+        return allPersons.listOfPresentPeople(date);
+    }
+
+    public List getAbsentPeople(String date) {
+        return allPersons.listOfAbsentPeople(date);
     }
 
     @Override

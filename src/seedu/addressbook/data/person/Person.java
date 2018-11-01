@@ -49,6 +49,7 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
+     * Only update the fees when called in setAssessmentsCommand
      * Assumption: Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Set<Exam> exams) {
@@ -74,7 +75,7 @@ public class Person implements ReadOnlyPerson {
     }
 
     /**
-     * Only update the fees when called in AddFeesCommand
+     * Only update the fees when called in EditFeesCommand
      * @param fees
      */
     public void setFees(Fees fees) {
@@ -100,19 +101,19 @@ public class Person implements ReadOnlyPerson {
     /**
      * Checks if the exam is already registered
      */
-    public boolean isExamPresent(Exam exam) {
-        boolean present = false;
+    public boolean isExamPresent(ReadOnlyExam exam) {
+        boolean isPresent = false;
         if (exams.contains(exam)) {
-            present = true;
+            isPresent = true;
         }
-        return present;
+        return isPresent;
     }
 
     /**
      * Removes the specified exam
      * @param exam to remove from person
      */
-    public void removeExam(Exam exam) {
+    public void removeExam(ReadOnlyExam exam) {
         exams.remove(exam);
     }
 
@@ -212,24 +213,31 @@ public class Person implements ReadOnlyPerson {
         return getAsTextShowAll();
     }
 
+    @Override
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
     /** Has a boolean to check if the date is a duplicate **/
     public boolean updateAttendanceMethod(String date, Boolean isPresent, Boolean overWrite) {
         boolean duplicateDate = attendance.addAttendance(date, isPresent, overWrite);
         return duplicateDate;
     }
 
+    /** Method to allow user to view the attendance of a person **/
     public String viewAttendanceMethod() {
         return attendance.viewAttendance();
     }
 
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
     /** Replaces the attendance if there is already a duplicate **/
     public boolean replaceAttendanceMethod(String date, Boolean isPresent, Boolean overWrite) {
-        boolean noDuplicateDate = !attendance.addAttendance(date, isPresent, overWrite);
-        return noDuplicateDate;
+        boolean duplicateDate = attendance.addAttendance(date, isPresent, overWrite);
+        return duplicateDate;
+    }
+
+    /** Method to get the attendance of a particular date **/
+    public Boolean viewAttendanceDateMethod(String date) {
+        return attendance.viewAttendanceDate(date);
     }
 
 }
