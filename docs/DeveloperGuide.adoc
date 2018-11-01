@@ -585,7 +585,6 @@ An example of how feature 1 - `Updating a person's attendance` works:
 ** Pros: Similar to alternative 1, having the user input an additional parameter and only having 1 method in the Attendance object can reduce the need to have unnecessary duplicates in the code.
 ** Cons: An additional parameter will require a change in the parser.
 // end::attendance[]
->>>>>>> c424378ebe74232ce9f4f658c4a9f2f6f3f070f7
 
 == Documentation
 
