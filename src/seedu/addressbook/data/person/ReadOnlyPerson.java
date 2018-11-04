@@ -68,8 +68,8 @@ public interface ReadOnlyPerson {
                 getName(),
                 getPhone(),
                 getEmail(),
-                getAddress());
-                //getFees());
+                getAddress(),
+                getFees());
         getAttendance();
 
         builder.append(stringChain)

@@ -14,8 +14,8 @@ public class Fees implements Printable {
     public static final String FEES_VALIDATION_REGEX = "[0-9]+([,.][0-9]{1,2})?";
     public static final String DATE_VALIDATION_REGEX = "[0-9]{1,2}-[0-9]{1,2}-[0-9]{4}";
 
-    public String value;
-    public String duedate;
+    public final String value;
+    public final String duedate;
 
     /**
      * Validates given AdaptedFees.
@@ -39,8 +39,8 @@ public class Fees implements Printable {
      *
      */
     public Fees() {
-        //this.value = "0.00";
-        //this.duedate = "12-12-1999";
+        this.value = "0.00";
+        this.duedate = "00-00-0000";
     }
 
     /**
