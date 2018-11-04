@@ -47,21 +47,25 @@ public class EditFeesCommand extends IndexFormatCommand {
     @Override
     public CommandResult execute() {
         try {
-            Person person = getTargetPerson();
-            person.setFees(fees);
-            if ("0.00".equals(fees.value)) {
-                Set<Tag> temp = new HashSet<>();
-                temp = person.getTags();
-                for (Tag t : temp) {
-                    if ("feesdue".equals(t.tagName)) {
-                        temp.remove(t);
+            try {
+                Person person = getTargetPerson();
+                person.setFees(fees);
+                if ("0.00".equals(fees.value)) {
+                    Set<Tag> temp = new HashSet<>();
+                    temp = person.getTags();
+                    for (Tag t : temp) {
+                        if ("feesdue".equals(t.tagName)) {
+                            temp.remove(t);
+                        }
                     }
+                    person.setTags(temp);
                 }
-                person.setTags(temp);
+                return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()));
+            } catch (PersonNotFoundException pnfe) {
+                return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()));
-        } catch (PersonNotFoundException pnfe) {
-            return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        } catch (IndexOutOfBoundsException ie) {
+            return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
