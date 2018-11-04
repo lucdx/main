@@ -38,8 +38,8 @@ public class Person implements ReadOnlyPerson {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        attendance = new Attendance();
         this.fees = new Fees();
+        attendance = new Attendance();
     }
 
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
@@ -59,7 +59,6 @@ public class Person implements ReadOnlyPerson {
         this.address = address;
         this.tags.addAll(tags);
         attendance = new Attendance();
-        this.fees = new Fees();
         this.exams.addAll(exams);
     }
 
@@ -205,7 +204,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, fees, exams, tags);
+        return Objects.hash(name, phone, email, address, exams, tags);
     }
 
     @Override
