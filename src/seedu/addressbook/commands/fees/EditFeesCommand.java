@@ -13,6 +13,9 @@ import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 
+import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
+import static seedu.addressbook.common.Utils.isValidDate;
+
 /**
  * Adds fees to a respective person
  */
@@ -33,6 +36,9 @@ public class EditFeesCommand extends IndexFormatCommand {
      */
     public EditFeesCommand(int index, String fees, String date) throws IllegalValueException {
         setTargetIndex(index, ObjectTargeted.PERSON);
+        if (!isValidDate(date) && !"0".equals(date)) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+        }
         this.fees = new Fees(fees, date);
     }
 

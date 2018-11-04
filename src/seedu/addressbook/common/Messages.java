@@ -30,7 +30,7 @@ public class Messages {
             + "Run the list/find command to generate a list of assessments.";
     public static final String MESSAGE_ASSESSMENT_NOT_IN_ADDRESSBOOK = "Assessment could not be found in address book!";
     public static final String MESSAGE_ASSESSMENTS_LISTED_OVERVIEW = "%1$d assessments listed!";
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format should be in DD-MM-YYYY and valid.\n";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date format should be in DD-MM-YYYY and be valid dates.\n";
     public static final String MESSAGE_WELCOME_ASCII_ART = "\n"
             + "   _____ _               _____             ____   __      ____   ____  \n"
             + "  / ____| |             |  __ \\           / __ \\  \\ \\    / /_ | |___ \\ \n"
