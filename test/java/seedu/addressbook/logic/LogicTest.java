@@ -405,7 +405,7 @@ public class LogicTest {
         String date = java.time.LocalDate.now().toString();
         TestDataHelper helper = new TestDataHelper();
         AddressBook expected = helper.generateAddressBook(false, true);
-        List<? extends ReadOnlyPerson> expectedList = expected.dueFeesPerson(date);
+        List<? extends ReadOnlyPerson> expectedList = expected.listdueFeesPerson(date);
 
         // prepare address book state
         helper.addToAddressBook(addressBook, false, true);
@@ -432,7 +432,7 @@ public class LogicTest {
         List<Person> threePerson = helper.generatePersonList(p1, p2, p3);
 
         AddressBook temp = helper.generateAddressBook(threePerson);
-        List<? extends ReadOnlyPerson> expectedList = temp.dueFeesPerson("0000-00-00");
+        List<? extends ReadOnlyPerson> expectedList = temp.listdueFeesPerson("0000-00-00");
         List<Person> twoPerson = helper.generatePersonList(p1, p3);
         AddressBook expected2 = helper.generateAddressBook(twoPerson);
         helper.addToAddressBook(addressBook, twoPerson);

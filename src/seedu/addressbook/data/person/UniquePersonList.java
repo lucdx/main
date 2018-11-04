@@ -123,7 +123,7 @@ public class UniquePersonList implements Iterable<Person> {
      * loops through list and appends data to string person.
      *
      */
-    public List<ReadOnlyPerson> dueFees(String date) {
+    public List<ReadOnlyPerson> listdueFees(String date) {
         //TODO: Fix messiness
         if (internalList.isEmpty()) {
             return Collections.unmodifiableList(internalList);
