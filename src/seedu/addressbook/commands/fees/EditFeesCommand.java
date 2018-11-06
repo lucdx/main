@@ -1,8 +1,5 @@
 package seedu.addressbook.commands.fees;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.addressbook.commands.commandformat.indexformat.IndexFormatCommand;
 import seedu.addressbook.commands.commandformat.indexformat.ObjectTargeted;
 import seedu.addressbook.commands.commandresult.CommandResult;
@@ -11,7 +8,6 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Fees;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
-import seedu.addressbook.data.tag.Tag;
 
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_FEES_VALUE_CONSTRAINTS;
