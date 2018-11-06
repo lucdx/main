@@ -14,6 +14,7 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
+import static seedu.addressbook.common.Messages.MESSAGE_FEES_VALUE_CONSTRAINTS;
 import static seedu.addressbook.common.Utils.isValidDate;
 
 /**
@@ -39,6 +40,9 @@ public class EditFeesCommand extends IndexFormatCommand {
         if (!isValidDate(date) && !"0".equals(date)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
+        if (fees.equals("0.00")) {
+            throw new IllegalValueException(MESSAGE_FEES_VALUE_CONSTRAINTS);
+        }
         this.fees = new Fees(fees, date);
     }
 
@@ -56,16 +60,6 @@ public class EditFeesCommand extends IndexFormatCommand {
             try {
                 Person person = getTargetPerson();
                 person.setFees(fees);
-                if ("0.00".equals(fees.value)) {
-                    Set<Tag> temp = new HashSet<>();
-                    temp = person.getTags();
-                    for (Tag t : temp) {
-                        if ("feesdue".equals(t.tagName)) {
-                            temp.remove(t);
-                        }
-                    }
-                    person.setTags(temp);
-                }
                 return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()));
             } catch (PersonNotFoundException pnfe) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);

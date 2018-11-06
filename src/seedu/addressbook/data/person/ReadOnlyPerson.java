@@ -68,12 +68,14 @@ public interface ReadOnlyPerson {
                 getName(),
                 getPhone(),
                 getEmail(),
-                getAddress(),
-                getFees());
+                getAddress());
         getAttendance();
 
-        builder.append(stringChain)
-                .append("Tags: ");
+        builder.append(stringChain);
+        if (getFees().isEdited) {
+            builder.append(Formatter.getPrintableString(true, getFees()));
+        }
+        builder.append("Tags: ");
         for (Tag tag : getTags()) {
             builder.append(tag);
         }
@@ -154,9 +156,16 @@ public interface ReadOnlyPerson {
         final StringBuilder builder = new StringBuilder();
         final String stringChain = Formatter.getPrintableString(
                 true,
-                getName(),
-                getFees());
+                getName());
         builder.append(stringChain);
+        if (getFees().isEdited) {
+            builder.append(Formatter.getPrintableString(true, getFees()));
+        }
+        else {
+            builder.append("{private Fees: ");
+            builder.append(getFees().value);
+            builder.append(" / }\n");
+        }
         return builder.toString();
     }
 

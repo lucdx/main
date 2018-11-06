@@ -16,6 +16,7 @@ public class Fees implements Printable {
 
     public final String value;
     public final String duedate;
+    public boolean isEdited = false;
 
     //TODO hide the fees when it's first initialised as 00-00-0000
     // new command for when they paid fees, fully, thus reinitiliasing as 00-00-0000

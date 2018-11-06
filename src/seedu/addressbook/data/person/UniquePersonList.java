@@ -130,17 +130,17 @@ public class UniquePersonList implements Iterable<Person> {
         }
         List<Person> copy = new ArrayList<>();
         for (Person p: internalList) {
-            StringBuilder main1 = new StringBuilder();
-            StringBuilder main2 = new StringBuilder();
-            main1.append(p.getFees().duedate.substring(6, 10));
-            main1.append(p.getFees().duedate.substring(3, 5));
-            main1.append(p.getFees().duedate.substring(0, 2));
-            main2.append(date.substring(0, 4));
-            main2.append(date.substring(5, 7));
-            main2.append(date.substring(8, 10));
-            //System.out.println(main1.toString());
-            //System.out.println(main2.toString());
-            if (!(main1.toString().equals("00000000"))) {
+            if (p.getFees().isEdited) {
+                StringBuilder main1 = new StringBuilder();
+                StringBuilder main2 = new StringBuilder();
+                main1.append(p.getFees().duedate.substring(6, 10));
+                main1.append(p.getFees().duedate.substring(3, 5));
+                main1.append(p.getFees().duedate.substring(0, 2));
+                main2.append(date.substring(0, 4));
+                main2.append(date.substring(5, 7));
+                main2.append(date.substring(8, 10));
+                //System.out.println(main1.toString());
+                //System.out.println(main2.toString());
                 if (main1.toString().compareTo(main2.toString()) <= 0) {
                     copy.add(p);
                     try {
@@ -162,8 +162,8 @@ public class UniquePersonList implements Iterable<Person> {
                     p.setTags(temp);
                 }
             }
-            copy.sort(new CustomComparator());
         }
+        copy.sort(new CustomComparator());
         return Collections.unmodifiableList(copy);
     }
 
@@ -175,7 +175,12 @@ public class UniquePersonList implements Iterable<Person> {
         if (internalList.isEmpty()) {
             return Collections.unmodifiableList(internalList);
         }
-        List<Person> copy = new ArrayList<>(internalList);
+        List<Person> copy = new ArrayList<>();
+        for (Person p: internalList) {
+            if (p.getFees().isEdited) {
+                copy.add(p);
+            }
+        }
         copy.sort(new CustomComparator());
         return Collections.unmodifiableList(copy);
     }

@@ -80,6 +80,12 @@ public class Person implements ReadOnlyPerson {
      */
     public void setFees(Fees fees) {
         this.fees = fees;
+        if (this.fees.duedate.equals("00-00-0000")) {
+            this.fees.isEdited = false;
+        }
+        else {
+            this.fees.isEdited = true;
+        }
     }
 
     /**
@@ -176,9 +182,7 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public Fees getFees() {
-        return fees;
-    }
+    public Fees getFees() { return fees; }
 
     @Override
     public Set<Exam> getExams() {

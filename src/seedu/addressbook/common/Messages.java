@@ -31,6 +31,7 @@ public class Messages {
     public static final String MESSAGE_ASSESSMENT_NOT_IN_ADDRESSBOOK = "Assessment could not be found in address book!";
     public static final String MESSAGE_ASSESSMENTS_LISTED_OVERVIEW = "%1$d assessments listed!";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date format should be in DD-MM-YYYY and be valid dates.\n";
+    public static final String MESSAGE_FEES_VALUE_CONSTRAINTS = "Fees must be positive and not be 0.00.\n";
     public static final String MESSAGE_WELCOME_ASCII_ART = "\n"
             + "   _____ _               _____             ____   __      ____   ____  \n"
             + "  / ____| |             |  __ \\           / __ \\  \\ \\    / /_ | |___ \\ \n"
