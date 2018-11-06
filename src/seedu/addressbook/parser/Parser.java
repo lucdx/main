@@ -5,6 +5,18 @@ import static seedu.addressbook.common.Messages.MESSAGE_COMMAND_NOT_FOUND;
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_WRONG_NUMBER_ARGUMENTS;
+import static seedu.addressbook.parser.RegexPattern.ASSESSMENT_DATA_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.ATTENDANCE_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.ATTENDANCE_VIEW_DATE_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.BASIC_COMMAND_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.BOOLEAN_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.EDIT_EXAM_INDEX_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.EXAM_DATA_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.FEES_DATA_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.KEYWORDS_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.PERSON_DATA_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.PERSON_INDEX_ARGS_FORMAT;
+import static seedu.addressbook.parser.RegexPattern.STATISTICS_DATA_ARGS_FORMAT;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -16,7 +28,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.IncorrectCommand;
@@ -72,70 +83,6 @@ import seedu.addressbook.data.exception.IllegalValueException;
  * Parses user input.
  */
 public class Parser {
-
-    private static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
-
-    private static final Pattern BOOLEAN_ARGS_FORMAT = Pattern.compile("(?<boolean>.+)");
-
-    private static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
-    private static final Pattern PERSON_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
-                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
-
-    private static final Pattern EXAM_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<isPrivate>p?)e/(?<examName>[^/]+)"
-                    + " s/(?<subjectName>[^/]+)"
-                    + " d/(?<examDate>[^/]+)"
-                    + " st/(?<examStartTime>[^/]+)"
-                    + " et/(?<examEndTime>[^/]+)"
-                    + " dt/(?<examDetails>[^/]+)");
-
-    private static final Pattern FEES_DATA_ARGS_FORMAT =
-            Pattern.compile("(?<index>[^/]+)"
-                    + " (?<fees>[^/]+)"
-                    + " (?<date>[^/]+)");
-
-    private static final Pattern STATISTICS_DATA_ARGS_FORMAT = //'/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<subjectName>[^/]+)"
-                    + " (?<isExamPrivate>p?)e/(?<examName>[^/]+)"
-                    + " ts/(?<topScorer>[^/]+)"
-                    + " av/(?<averageScore>[^/]+)"
-                    + " te/(?<totalExamTakers>[^/]+)"
-                    + " ab/(?<numberAbsent>[^/]+)"
-                    + " tp/(?<totalPass>[^/]+)"
-                    + " mm/(?<maxMin>[^/]+)");
-
-    private static final Pattern ATTENDANCE_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<targetIndex>.+)"
-                    + " d/(?<date>[^/]+)"
-                    + " att/(?<isPresent>[0-1])");
-
-    private static final Pattern ATTENDANCE_VIEW_DATE_FORMAT =
-            Pattern.compile("d/(?<date>[^/]+)"); // '/' forward slashes are reserved for delimiter prefixes
-
-    private static final Pattern EDIT_EXAM_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>[^/]+)"
-            + "(p/(?<isPrivate>[^/]+))?"
-            + "(e/(?<examName>[^/]+))?"
-            + "(s/(?<subjectName>[^/]+))?"
-            + "(d/(?<examDate>[^/]+))?" // '/' forward slashes are reserved for delimiter prefixes
-            + "(st/(?<examStartTime>[^/]+))?"
-            + "(et/(?<examEndTime>[^/]+))?"
-            + "(dt/(?<examDetails>[^/]+))?");
-
-    private static final Pattern ASSESSMENT_DATA_ARGS_FORMAT = //'/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<examName>[^/]+)");
-
-    /**
-     * Used for initial separation of command word and args.
-     */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-
     /**
      * Signals that the user input could not be parsed.
      */
@@ -258,7 +205,7 @@ public class Parser {
             return new ListDueFeesCommand();
 
         case DeleteExamCommand.COMMAND_WORD:
-            return prepareDeleteExam(arguments);
+            return prepareSingleIndexCommand(arguments, new DeleteExamCommand(), ObjectTargeted.EXAM);
 
         case ClearExamsCommand.COMMAND_WORD:
             return prepareVoidCommand(arguments, new ClearExamsCommand());
@@ -733,21 +680,6 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the edit exam command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareDeleteExam(String args) {
-        try {
-            final int targetIndex = parseArgsAsDisplayedIndex(args);
-            return new DeleteExamCommand(targetIndex);
-        } catch (ParseException | NumberFormatException e) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExamCommand.MESSAGE_USAGE));
-        }
-    }
-
-    /**
      * Parses arguments in the context of the delete grades command.
      *
      * @param args full command args string
@@ -807,6 +739,7 @@ public class Parser {
      */
     private Command prepareRegisterExam(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     RegisterExamCommand.MESSAGE_USAGE));
@@ -836,6 +769,7 @@ public class Parser {
      */
     private Command prepareDeregisterExam(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeregisterExamCommand.MESSAGE_USAGE));
