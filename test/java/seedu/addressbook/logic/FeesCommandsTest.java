@@ -1,5 +1,6 @@
 package seedu.addressbook.logic;
 
+import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 import static seedu.addressbook.logic.CommandAssertions.assertCommandBehavior;
@@ -105,7 +106,7 @@ public class FeesCommandsTest {
         logic.setLastShownList(threePersons);
 
         assertCommandBehavior("editfees 1 0.00 00-00-0000",
-                String.format(EditFeesCommand.MESSAGE_SUCCESS, p2.getAsTextShowFee()),
+                String.format(MESSAGE_DATE_CONSTRAINTS),
                 expected,
                 false,
                 threePersons);
@@ -131,7 +132,7 @@ public class FeesCommandsTest {
         addressBook.addPerson(p1);
         logic.setLastShownList(lastShownList);
 
-        assertCommandBehavior("editfees 2 0.00 00-00-0000",
+        assertCommandBehavior("editfees 2 1.11 11-11-2018",
                 MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
                 expected,
                 false,
@@ -176,7 +177,7 @@ public class FeesCommandsTest {
         String date = java.time.LocalDate.now().toString();
         TestDataHelper helper = new TestDataHelper();
         AddressBook expected = helper.generateAddressBook(false, true);
-        List<? extends ReadOnlyPerson> expectedList = expected.dueFeesPerson(date);
+        List<? extends ReadOnlyPerson> expectedList = expected.listdueFeesPerson(date);
 
         // prepare address book state
         helper.addToAddressBook(addressBook, false, true);
@@ -203,7 +204,7 @@ public class FeesCommandsTest {
         List<Person> threePerson = helper.generatePersonList(p1, p2, p3);
 
         AddressBook temp = helper.generateAddressBook(threePerson);
-        List<? extends ReadOnlyPerson> expectedList = temp.dueFeesPerson("0000-00-00");
+        List<? extends ReadOnlyPerson> expectedList = temp.listdueFeesPerson("0000-00-00");
         List<Person> twoPerson = helper.generatePersonList(p1, p3);
         AddressBook expected2 = helper.generateAddressBook(twoPerson);
         helper.addToAddressBook(addressBook, twoPerson);
