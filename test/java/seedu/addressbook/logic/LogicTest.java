@@ -2,6 +2,7 @@ package seedu.addressbook.logic;
 
 import static junit.framework.TestCase.assertEquals;
 import static seedu.addressbook.common.Messages.MESSAGE_COMMAND_NOT_FOUND;
+import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_NO_NON_PRIVATE_EXAMS;
 import static seedu.addressbook.common.Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
@@ -334,7 +335,7 @@ public class LogicTest {
         logic.setLastShownList(threePersons);
 
         assertCommandBehavior("editfees 1 0.00 00-00-0000",
-                String.format(EditFeesCommand.MESSAGE_SUCCESS, p2.getAsTextShowFee()),
+                String.format(MESSAGE_DATE_CONSTRAINTS),
                 expected,
                 false,
                 threePersons);
@@ -360,7 +361,7 @@ public class LogicTest {
         addressBook.addPerson(p1);
         logic.setLastShownList(lastShownList);
 
-        assertCommandBehavior("editfees 2 0.00 00-00-0000",
+        assertCommandBehavior("editfees 2 1.11 12-12-2018",
                 MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
                 expected,
                 false,

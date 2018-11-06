@@ -87,9 +87,9 @@ public class FormatterTest {
 
         assertEmptyListShowsEmpty(PersonListFormat.FEES_DETAILS);
         addInputToExpectedOutput(helper.generatePersonList(false, false , false),
-                String.format(" 1. Person 1%1$s {private Fees: 0.00 / 00-00-0000} %1$s %1$s"
-                        + " 2. Person 2%1$s {private Fees: 0.00 / 00-00-0000} %1$s %1$s"
-                        + " 3. Person 3%1$s {private Fees: 0.00 / 00-00-0000} %1$s %1$s %1$s"
+                String.format(" 1. Person 1%1$s {private Fees: 0.00 / }%1$s %1$s"
+                        + " 2. Person 2%1$s {private Fees: 0.00 / }%1$s %1$s"
+                        + " 3. Person 3%1$s {private Fees: 0.00 / }%1$s %1$s %1$s"
                         , NEWLINE));
         assertFormatterBehaviour(PersonListFormat.FEES_DETAILS);
     }
