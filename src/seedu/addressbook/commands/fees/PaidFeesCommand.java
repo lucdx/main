@@ -5,7 +5,14 @@ import seedu.addressbook.commands.commandresult.CommandResult;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.Fees;
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import seedu.addressbook.data.tag.Tag;
+import seedu.addressbook.formatter.PersonListFormat;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Remove due fees from a respective person
@@ -34,7 +41,17 @@ public class PaidFeesCommand extends IndexFormatCommand {
             try {
                 Person person = getTargetPerson();
                 person.setFees(new Fees());
-                return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()));
+                Set<Tag> temp = new HashSet<>();
+                temp = person.getTags();
+                for (Tag t : temp) {
+                    if ("feesdue".equals(t.tagName)) {
+                        temp.remove(t);
+                    }
+                }
+                person.setTags(temp);
+                List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
+                return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()), allPersons,
+                        PersonListFormat.ALL_PUBLIC_DETAILS);
             } catch (PersonNotFoundException pnfe) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
             }
