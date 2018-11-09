@@ -69,15 +69,13 @@ public class FormatterTest {
         List<Person> persons = List.of(p1, p2, p3);
         String expected = String.format(" 1. Person 1%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s"
                 + " 2. Person 2%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s"
-                + " 3. Person 3%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s %1$s"
-                , NEWLINE);
+                + " 3. Person 3%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s %1$s", NEWLINE);
         assertEquals(expected, Formatter.format(persons, PersonListFormat.FEES_DUE_DETAILS));
 
         addInputToExpectedOutput(helper.generatePersonList(false, false , false),
                 String.format(" 1. Person 1%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s"
                         + " 2. Person 2%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s"
-                        + " 3. Person 3%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s %1$s"
-                        , NEWLINE));
+                        + " 3. Person 3%1$s {private Fees: 0.00 / 00-00-0000} %1$s Overdue!%1$s %1$s %1$s", NEWLINE));
         assertFormatterBehaviour(PersonListFormat.FEES_DUE_DETAILS);
     }
 
@@ -89,8 +87,7 @@ public class FormatterTest {
         addInputToExpectedOutput(helper.generatePersonList(false, false , false),
                 String.format(" 1. Person 1%1$s No Fees owed!%1$s %1$s"
                         + " 2. Person 2%1$s No Fees owed!%1$s %1$s"
-                        + " 3. Person 3%1$s No Fees owed!%1$s %1$s %1$s"
-                        , NEWLINE));
+                        + " 3. Person 3%1$s No Fees owed!%1$s %1$s %1$s", NEWLINE));
         assertFormatterBehaviour(PersonListFormat.FEES_DETAILS);
     }
 
