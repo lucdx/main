@@ -130,7 +130,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
         List<Person> copy = new ArrayList<>();
         for (Person p: internalList) {
-            if (p.getFees().isEdited) {
+            if (p.getFees().isEdited()) {
                 StringBuilder main1 = new StringBuilder();
                 StringBuilder main2 = new StringBuilder();
                 main1.append(p.getFees().duedate.substring(6, 10));
@@ -177,7 +177,7 @@ public class UniquePersonList implements Iterable<Person> {
         }
         List<Person> copy = new ArrayList<>();
         for (Person p: internalList) {
-            if (p.getFees().isEdited) {
+            if (p.getFees().isEdited()) {
                 copy.add(p);
             }
         }

@@ -1,5 +1,9 @@
 package seedu.addressbook.commands.fees;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.addressbook.commands.commandformat.indexformat.IndexFormatCommand;
 import seedu.addressbook.commands.commandresult.CommandResult;
 import seedu.addressbook.common.Messages;
@@ -9,10 +13,6 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.formatter.PersonListFormat;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Remove due fees from a respective person

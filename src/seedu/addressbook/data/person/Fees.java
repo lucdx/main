@@ -16,7 +16,7 @@ public class Fees implements Printable {
 
     public final String value;
     public final String duedate;
-    public boolean isEdited = false;
+    private boolean isEdited = false;
 
     //TODO hide the fees when it's first initialised as 00-00-0000
     // new command for when they paid fees, fully, thus reinitiliasing as 00-00-0000
@@ -72,6 +72,17 @@ public class Fees implements Printable {
         return true;
     }
 
+    public boolean isEdited() {
+        return isEdited; }
+
+    /**
+     * Changes the value of isEdited, whenever a fee is set accordingly.
+     * @param val
+     */
+    public void getEdited(boolean val) {
+        isEdited = val;
+        return;
+    }
     @Override
     public String getPrintableString(boolean showPrivate) {
         if (isPrivate()) {

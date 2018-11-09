@@ -72,7 +72,7 @@ public interface ReadOnlyPerson {
         getAttendance();
 
         builder.append(stringChain);
-        if (getFees().isEdited) {
+        if (getFees().isEdited()) {
             builder.append(Formatter.getPrintableString(true, getFees()));
         }
         builder.append("Tags: ");
@@ -158,10 +158,9 @@ public interface ReadOnlyPerson {
                 true,
                 getName());
         builder.append(stringChain);
-        if (getFees().isEdited) {
+        if (getFees().isEdited()) {
             builder.append(Formatter.getPrintableString(true, getFees()));
-        }
-        else {
+        } else {
             //builder.append("{private Fees: ");
             //builder.append(getFees().value);
             //builder.append(" / }\n");
