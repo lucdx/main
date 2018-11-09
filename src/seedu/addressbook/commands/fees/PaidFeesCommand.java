@@ -32,7 +32,7 @@ public class PaidFeesCommand extends IndexFormatCommand {
      * Command constructed has no functionality
      * */
     //public PaidFeesCommand() {
-        // Does nothing
+    // Does nothing
     //}
 
     @Override
