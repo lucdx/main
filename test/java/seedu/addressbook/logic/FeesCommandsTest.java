@@ -17,6 +17,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.addressbook.TestDataHelper;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.fees.EditFeesCommand;
+import seedu.addressbook.commands.fees.PaidFeesCommand;
 import seedu.addressbook.commands.fees.ViewFeesCommand;
 import seedu.addressbook.commands.person.ViewCommand;
 import seedu.addressbook.data.AddressBook;
@@ -230,6 +231,28 @@ public class FeesCommandsTest {
                 expected,
                 true,
                 expectedList);
+    }
+
+    @Test
+    public void executePaidFeesSuccessful() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expected = helper.generateAddressBook(threePersons);
+        Fees fee = new Fees("0.00", "00-00-0000");
+        expected.findPerson(p2).setFees(fee);
+
+        helper.addToAddressBook(addressBook, threePersons);
+        logic.setLastShownList(threePersons);
+        assertCommandBehavior("paidfees 2",
+                String.format(String.format(PaidFeesCommand.MESSAGE_SUCCESS, p2.getAsTextShowFee())),
+                expected,
+                true,
+                threePersons);
     }
 
     @Test
