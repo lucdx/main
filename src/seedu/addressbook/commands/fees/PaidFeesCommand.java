@@ -31,9 +31,9 @@ public class PaidFeesCommand extends IndexFormatCommand {
      * Constructor used for Privileges
      * Command constructed has no functionality
      * */
-    public PaidFeesCommand() {
+    //public PaidFeesCommand() {
         // Does nothing
-    }
+    //}
 
     @Override
     public CommandResult execute() {

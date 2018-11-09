@@ -81,7 +81,6 @@ public class Fees implements Printable {
      */
     public void getEdited(boolean val) {
         isEdited = val;
-        return;
     }
     @Override
     public String getPrintableString(boolean showPrivate) {

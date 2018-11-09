@@ -36,7 +36,7 @@ public class EditFeesCommand extends IndexFormatCommand {
         if (!isValidDate(date) && !"0".equals(date)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        if (fees.equals("0.00")) {
+        if ("0.00".equals(fees)) {
             throw new IllegalValueException(MESSAGE_FEES_VALUE_CONSTRAINTS);
         }
         this.fees = new Fees(fees, date);
