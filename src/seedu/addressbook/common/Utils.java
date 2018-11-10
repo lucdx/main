@@ -1,10 +1,13 @@
 package seedu.addressbook.common;
 
+import seedu.addressbook.data.person.Person;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,5 +66,25 @@ public class Utils {
             isValid = false;
         }
         return isValid;
+    }
+
+    /**
+     * Custom comparator for Date string in Fees in the form of DD-MM-YYYY
+     * Allows for sorting of Person's list according to YYYYMMDD of Fees section.
+     */
+    public static class FeesComparator implements Comparator<Person> {
+        @Override
+        public int compare(Person o1, Person o2) {
+            StringBuilder main1 = new StringBuilder();
+            StringBuilder main2 = new StringBuilder();
+            main1.append(o1.getFees().duedate.substring(6, 10));
+            main1.append(o1.getFees().duedate.substring(3, 5));
+            main1.append(o1.getFees().duedate.substring(0, 2));
+            main2.append(o2.getFees().duedate.substring(6, 10));
+            main2.append(o2.getFees().duedate.substring(3, 5));
+            main2.append(o2.getFees().duedate.substring(0, 2));
+            return main1.toString().compareTo
+                    (main2.toString());
+        }
     }
 }
