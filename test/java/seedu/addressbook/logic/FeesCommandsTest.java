@@ -67,13 +67,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_EditFees_InvalidData() throws Exception {
+    public void execute_editFees_invalidData() throws Exception {
         assertCommandBehavior(
                 "editfees 2 1.111 01-01-2018", Fees.MESSAGE_FEES_CONSTRAINTS);
     }
 
     @Test
-    public void execute_EditFees_Successful() throws Exception {
+    public void execute_editFees_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -94,7 +94,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_EditFees_UpdateZero() throws Exception {
+    public void execute_editFees_updateZero() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p2 = helper.generatePerson(2, true);
         Tag temp = new Tag("feesdue");
@@ -122,7 +122,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_EditFees_InvalidPerson() throws Exception {
+    public void execute_editFees_invalidPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
@@ -142,13 +142,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_EditFees_InvalidIndex() throws Exception {
+    public void execute_editFees_invalidIndex() throws Exception {
         assertCommandBehavior("editfees 0 12.12 01-01-2018",
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_ListFees_Successful() throws Exception {
+    public void execute_listFees_successful() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expected = helper.generateAddressBook(false, true);
@@ -165,7 +165,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_ListFees_Empty() throws Exception {
+    public void execute_listFees_empty() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         List<? extends ReadOnlyPerson> expectedList = new ArrayList<>();
@@ -180,7 +180,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_ListDue_FeesSuccessful() throws Exception {
+    public void execute_listDue_feesSuccessful() throws Exception {
         // prepare expectations
         String date = java.time.LocalDate.now().toString();
         TestDataHelper helper = new TestDataHelper();
@@ -198,7 +198,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_ListDueFees_WithUpdate() throws Exception {
+    public void execute_listDueFees_withUpdate() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -226,7 +226,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_ListDueFees_Empty() throws Exception {
+    public void execute_listDueFees_empty() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         List<? extends ReadOnlyPerson> expectedList = new ArrayList<>();
@@ -241,7 +241,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_PaidFees_Successful() throws Exception {
+    public void execute_paidFees_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -263,7 +263,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_PaidFees_InvalidPerson() throws Exception {
+    public void execute_paidFees_invalidPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
@@ -283,13 +283,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_PaidFees_InvalidIndex() throws Exception {
+    public void execute_paidFees_invalidIndex() throws Exception {
         assertCommandBehavior("paidfees 0",
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void execute_ViewFees_Successful() throws Exception {
+    public void execute_viewFees_successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -311,12 +311,12 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void execute_ViewFees_InvalidIndex() throws Exception {
+    public void execute_viewFees_invalidIndex() throws Exception {
         assertInvalidIndexBehaviorForCommand("viewfees");
     }
 
     @Test
-    public void execute_ViewFees_InvalidArgsFormat() throws Exception {
+    public void execute_viewFees_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewFeesCommand.MESSAGE_USAGE);
         assertCommandBehavior("viewfees ", expectedMessage);
         assertCommandBehavior("viewfees arg not number", expectedMessage);

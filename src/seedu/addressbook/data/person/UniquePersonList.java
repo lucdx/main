@@ -190,7 +190,7 @@ public class UniquePersonList implements Iterable<Person> {
      * Allows for sorting of Person's list according to YYYYMMDD of Fees section.
      */
     public class CustomComparator implements Comparator<Person> {
-        @Override
+        //@Override
         public int compare(Person o1, Person o2) {
             StringBuilder main1 = new StringBuilder();
             StringBuilder main2 = new StringBuilder();
