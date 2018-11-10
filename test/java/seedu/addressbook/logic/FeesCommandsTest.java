@@ -1,6 +1,7 @@
 package seedu.addressbook.logic;
 
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
+import static seedu.addressbook.common.Messages.MESSAGE_FEES_VALUE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.addressbook.common.Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
@@ -145,6 +146,27 @@ public class FeesCommandsTest {
     public void execute_editFees_invalidIndex() throws Exception {
         assertCommandBehavior("editfees 0 12.12 01-01-2018",
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_editFees_invalidValue() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expected = helper.generateAddressBook(threePersons);
+        expected.findPerson(p2).setFees(helper.fees());
+
+        helper.addToAddressBook(addressBook, threePersons);
+        logic.setLastShownList(threePersons);
+        assertCommandBehavior("editfees 2 0.00 12-12-2018",
+                MESSAGE_FEES_VALUE_CONSTRAINTS,
+                expected,
+                false,
+                threePersons);
     }
 
     @Test
