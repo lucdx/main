@@ -35,7 +35,7 @@ Under this project, I serve as the Scribe, monitoring all the documentation rela
 **** TBC
 **** TBC
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-F10-1/main/pull/86[#86]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2113-AY1819S1-F10-1/main/pull/86[#86], https://github.com/CS2113-AY1819S1-F10-1/main/pull/223[#223]
 
 == Contributions to the User Guide
 
