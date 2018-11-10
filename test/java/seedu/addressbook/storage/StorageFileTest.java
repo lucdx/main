@@ -25,6 +25,7 @@ import seedu.addressbook.data.StatisticsBook;
 import seedu.addressbook.data.account.Account;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.AssignmentStatistics;
+import seedu.addressbook.data.person.Attendance;
 import seedu.addressbook.data.person.Exam;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.details.Address;
@@ -173,6 +174,7 @@ public class StorageFileTest {
             assertEquals(actual.getMasterPassword(), expected.getMasterPassword());
         }
     }
+
     @Test
     public void load_validFormatIsPerm() throws Exception {
         AddressBook actual = getStorage("ValidDataWithIsPerm.txt").load();
@@ -288,6 +290,16 @@ public class StorageFileTest {
         storage.syncAddressBookExamBook(ab, eb);
     }
 
+    @Test
+    public void load_validAttendance() throws Exception {
+        AddressBook actual = getStorage("ValidDataWithAttendance.txt").load();
+        AddressBook expected = getTestAddressBookWithAttendance();
+
+        // ensure loaded AddressBook is properly constructed with test data
+        assertEquals(actual, expected);
+        assertEquals(actual.getAllPersons(), expected.getAllPersons());
+    }
+
     /** Asserts that loading StorageFile will return an Exception with expectedMessage*/
     private void assertReturnsExceptionMessage(StorageFile storage, String expectedMessage) throws Exception {
         try {
@@ -372,4 +384,66 @@ public class StorageFileTest {
         return sb;
     }
 
+    private AddressBook getTestAddressBookWithAttendance() throws Exception {
+        return getTestAddressBookWithAttendance(false, false);
+    }
+
+    private AddressBook getTestAddressBookWithAttendance(boolean isUsingDefaultPassword, boolean hasAccount)
+            throws Exception {
+        AddressBook ab = new AddressBook();
+        final Person john = new Person(new Name("John Doe"),
+                new Phone("98765432", false),
+                new Email("johnd@gmail.com", false),
+                new Address("John street, block 123, #01-01", false),
+                Collections.emptySet());
+        Attendance attendanceJohn = new Attendance();
+        attendanceJohn.getAttendancePersonMap().put("07-11-2018", false);
+        john.setAttendance(attendanceJohn);
+        if (hasAccount) {
+            john.setAccount(new Account("user", "pw", "Admin"));
+        }
+        ab.addPerson(john);
+
+        final Person betsy = new Person(new Name("Betsy Crowe"),
+                new Phone("1234567", true),
+                new Email("betsycrowe@gmail.com", false),
+                new Address("Newgate Prison", true),
+                new HashSet<>(Arrays.asList(new Tag("friend"), new Tag("criminal"))));
+        Attendance attendanceBetsy = new Attendance();
+        attendanceBetsy.getAttendancePersonMap().put("07-11-2018", true);
+        betsy.setAttendance(attendanceBetsy);
+        ab.addPerson(betsy);
+
+        if (!isUsingDefaultPassword) {
+            ab.setMasterPassword("default_pw");
+        }
+
+        return ab;
+    }
+
+    @Test
+    public void save_validAddressBookWithAttendance() throws Exception {
+        AddressBook ab = getTestAddressBookWithAttendance(true, false);
+        ExamBook eb = getTestExamBook();
+        StatisticsBook sb = getTestStatisticsBook();
+        StorageFile storage = getTempStorage();
+        storage.saveExam(eb);
+        storage.save(ab);
+        storage.saveStatistics(sb);
+        // Checks that the password and isPerm is saved as a new field
+        assertStorageFilesEqual(storage, getStorage("ValidDataWithAttendance.txt"));
+
+        ab = getTestAddressBookWithAttendance();
+        storage = getTempStorage();
+        storage.save(ab);
+
+        assertStorageFilesEqual(storage, getStorage("ValidDataWithAttendance.txt"));
+        assertStorageFilesEqual(storage, getStorage("ValidDataWithAttendance.txt", "ValidExamData.txt",
+                "ValidStatisticsData.txt"));
+
+        ab = getTestAddressBookWithAttendance(true, false);
+        storage = getTempStorage();
+        storage.save(ab);
+        assertStorageFilesEqual(storage, getStorage("ValidDataWithAttendance.txt"));
+    }
 }

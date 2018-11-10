@@ -260,6 +260,7 @@ An Example of how feature 5 - `Registering a person for an exam` works:
 . The exam is added to the specific person.
 . For the AddressBook, any copies of the original exam is removed and replaced with the new exam.
 
+
 This is demostrated by the following sequence diagram:
 [[fig-registerPersonDiagram]]
 .Sequence Diagram of registering person for an exam with no errors occuring
@@ -318,7 +319,6 @@ image::Privilege.png[width="600"]
 * *BasicUser* is the class with the lowest access level, and the ancestor to other 2 *User* classes. +
 * To create an increasing level of access, each *User* of a higher level inherits from the successively lower one. +
 * *User* levels have their own list of new commands they can run, which is appended to the list inherited from their parent. +
-
 
 * *Account* class, which contains its respective *Privilege* object as well as login details, assigns an access level to a *Person*. +
 * When switching *Privilege* levels, the *Privilege* object referred to by *Logic* will point its *User*(`user`) and *Person*(`myPerson`) to those of the desired *Privilege level*, as seen below in the Object Diagram and Sequence Diagram. +
@@ -523,12 +523,22 @@ Command first.
 * **Alternative 2:** Using another parameter such as Name of the Person, instead of INDEX
 ** Pros: More intuitive to layman Users.
 ** Cons: There may be Persons with identical names, thus resulting in conflicts in ViewCommand.
-
 // end::Fees[]
+
 // tag::attendance[]
 [[attendance]]
 === Attendance Feature
-// TODO UML to be added here
+[[fig-AttendanceDiagram]]
+.Class Diagram of the Attendance feature
+image::ClassDiagram_Attendance.png[width="800"]
+
+The attendance field is an additional field to every `Person` object:
+
+. Each Person will have an Attendance object
+. Each Attendance object will contain a Hashmap, which will store the attendance of each person by keying each date to a boolean (isPresent).
+. UniquePersonList will contain 2 lists, containing a list of people who are present or absent for each particular date.
+. Users can thus check the attendance of a particular person, or for a particular date.
+
 
 ==== Current Implementation
 The AddressBook contains the attendance of each person for each date that his/her attendance is taken. The current set of commands include:
@@ -584,6 +594,19 @@ An example of how feature 1 - `Updating a person's attendance` works:
 * **Alternative 3:** Have the user input an additional parameter (Boolean overWrite) if they want to overwrite the current data
 ** Pros: Similar to alternative 1, having the user input an additional parameter and only having 1 method in the Attendance object can reduce the need to have unnecessary duplicates in the code.
 ** Cons: An additional parameter will require a change in the parser.
+
+===== Aspect: How to store data in xml, addressbook.txt
+* **Alternative 1 (Current choice):** Use 2 list to store a list of dates and a list of absent/present
+** Pros: Simple implementation, and utilizes the fact that each date can only have either present/absent. Iterating through the map to generate the 2 list will thus ensure that the data is in order
+** Cons: In the xml format, data will be stored as 2 separate lists, which may not be as user friendly to edit directly.
+
+* **Alternative 2:** Use a list of pairs, Pair <String Date, Boolean isPresent>
+** Pros: Only requires 1 single list to store the data of the entire map
+** Cons: Such implementation will require a Pair object, which will require additional methods and classes, thus requiring longer code.
+
+* **Alternative 3:** Convert Hashmap to xml directly
+** Pros: Direct transfer of data will thus require less memory space to store the same data.
+** Cons: A Hashmap to xml converter will require either a very long code (unnecessary for only 1 map), or requires the import of an external library.
 // end::attendance[]
 
 == Documentation

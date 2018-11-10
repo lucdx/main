@@ -109,6 +109,7 @@ public class AttendanceTest {
 
     @Test
     public void executeUpdateAttendanceInvalidDateFormat() throws Exception {
+        String expectedMessage = MESSAGE_DATE_CONSTRAINTS;
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         List<Person> personList = helper.generatePersonList(p1);
@@ -118,7 +119,7 @@ public class AttendanceTest {
         logic.setLastShownList(personList);
 
         assertCommandBehavior("attendance 1 d/123123-123 att/1 ",
-                MESSAGE_DATE_CONSTRAINTS,
+                expectedMessage,
                 expectedBook,
                 false,
                 personList);
@@ -316,6 +317,7 @@ public class AttendanceTest {
 
     @Test
     public void executeReplaceAttendanceInvalidDateFormat() throws Exception {
+        String expectedMessage = MESSAGE_DATE_CONSTRAINTS;
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         List<Person> personList = helper.generatePersonList(p1);
@@ -325,7 +327,7 @@ public class AttendanceTest {
         logic.setLastShownList(personList);
 
         assertCommandBehavior("replaceAtten 1 d/123123-123 att/1 ",
-                MESSAGE_DATE_CONSTRAINTS,
+                expectedMessage,
                 expectedBook,
                 false,
                 personList);
@@ -543,5 +545,4 @@ public class AttendanceTest {
                 false,
                 threePersons);
     }
-
 }

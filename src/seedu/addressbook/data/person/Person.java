@@ -243,4 +243,8 @@ public class Person implements ReadOnlyPerson {
         return attendance.viewAttendanceDate(date);
     }
 
+    /** Setter for attendance **/
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
 }

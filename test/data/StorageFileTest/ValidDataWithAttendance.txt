@@ -5,21 +5,10 @@
         <phone isPrivate="false">98765432</phone>
         <email isPrivate="false">johnd@gmail.com</email>
         <address isPrivate="false">John street, block 123, #01-01</address>
-        <attendance/>
-        <exams isPrivate="false">
-            <subjectName>Mathematics</subjectName>
-            <examName>Math Midterms</examName>
-            <examDate>01-12-2018</examDate>
-            <examStartTime>09:00</examStartTime>
-            <examEndTime>10:00</examEndTime>
-            <examDetails>Held in MPSH</examDetails>
-            <takers>1</takers>
-        </exams>
-        <account>
-            <username>user</username>
-            <password>pw</password>
-            <privilege>Admin</privilege>
-        </account>
+        <attendance>
+            <attendanceDate>07-11-2018</attendanceDate>
+            <attendanceIsPresent>Absent</attendanceIsPresent>
+        </attendance>
         <fees isPrivate="true">
             <value>0.00</value>
             <duedate>00-00-0000</duedate>
@@ -30,7 +19,10 @@
         <phone isPrivate="true">1234567</phone>
         <email isPrivate="false">betsycrowe@gmail.com</email>
         <address isPrivate="true">Newgate Prison</address>
-        <attendance/>
+        <attendance>
+            <attendanceDate>07-11-2018</attendanceDate>
+            <attendanceIsPresent>Present</attendanceIsPresent>
+        </attendance>
         <tagged>friend</tagged>
         <tagged>criminal</tagged>
         <fees isPrivate="true">

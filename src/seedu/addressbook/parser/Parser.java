@@ -606,7 +606,6 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_DATE_CONSTRAINTS
                     + UpdateAttendanceCommand.MESSAGE_USAGE);
         }
-
     }
 
     /**
