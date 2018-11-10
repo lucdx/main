@@ -473,6 +473,7 @@ A private attribute under the Person class is initialised when a Person is added
 the fee and the other being the due date for the respective fee. The current set of commands include:
 
 . `Editing a Fee`
+. `Paying a Fee in full`
 . `Viewing Fee of a Person`
 . `Listing all Fees`
 . `Listing all Due Fees`
@@ -495,6 +496,14 @@ An Example of how command 1 - `Editing the Fee of a Person` works:
 * **Alternative 3:** A compulsory attribute under Person Class hence occupying a data field in the input for AddPersonCommand.
 ** Pros: Easy to implement and parse.
 ** Cons: Input for Add Command would be too long as it will have too many data entry points.
+
+===== Aspect: Paying a fee for a Person
+* **Alternative 1 (current choice):** Separate command for Admin to indicate a Person to have paid fees fully.
+** Pros: Convenient for admins to control Fees data of each Person. +
+** Cons: May seem redundant for 2 Commands to change the attributes of Fees.
+* **Alternative 2:** Using EditFeesCommand to indicate the payment of Fees when edited back to 0 value.
+** Pros: Lesser commands in the Fees feature, therefore lesser clutter.
+** Cons: Counter intuitive as Admin would have to manually edit values to be "0.00".
 
 ===== Aspect: How to List fees of everyone
 * **Alternative 1 (current choice):** Shallow copies the internalList of ReadOnlyPerson, sorts the copy with a custom comparator and prints the list,
