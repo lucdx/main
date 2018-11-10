@@ -3,7 +3,6 @@ package seedu.addressbook.data.person;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -163,7 +162,7 @@ public class UniquePersonList implements Iterable<Person> {
                 }
             }
         }
-        copy.sort(new CustomComparator());
+        copy.sort(new Utils.FeesComparator());
         return Collections.unmodifiableList(copy);
     }
 
@@ -181,28 +180,8 @@ public class UniquePersonList implements Iterable<Person> {
                 copy.add(p);
             }
         }
-        copy.sort(new CustomComparator());
+        copy.sort(new Utils.FeesComparator());
         return Collections.unmodifiableList(copy);
-    }
-
-    /**
-     * Custom comparator for Date string in Fees in the form of DD-MM-YYYY
-     * Allows for sorting of Person's list according to YYYYMMDD of Fees section.
-     */
-    public class CustomComparator implements Comparator<Person> {
-        @Override
-        public int compare(Person o1, Person o2) {
-            StringBuilder main1 = new StringBuilder();
-            StringBuilder main2 = new StringBuilder();
-            main1.append(o1.getFees().duedate.substring(6, 10));
-            main1.append(o1.getFees().duedate.substring(3, 5));
-            main1.append(o1.getFees().duedate.substring(0, 2));
-            main2.append(o2.getFees().duedate.substring(6, 10));
-            main2.append(o2.getFees().duedate.substring(3, 5));
-            main2.append(o2.getFees().duedate.substring(0, 2));
-            return main1.toString().compareTo
-                    (main2.toString());
-        }
     }
 
     /**

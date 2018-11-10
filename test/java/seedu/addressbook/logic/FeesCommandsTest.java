@@ -206,11 +206,16 @@ public class FeesCommandsTest {
         // prepare expectations
         String date = java.time.LocalDate.now().toString();
         TestDataHelper helper = new TestDataHelper();
-        AddressBook expected = helper.generateAddressBook(false, true);
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+        AddressBook expected = helper.generateAddressBook(threePersons);
         List<? extends ReadOnlyPerson> expectedList = expected.listdueFeesPerson(date);
 
         // prepare address book state
-        helper.addToAddressBook(addressBook, false, true);
+        helper.addToAddressBook(addressBook, threePersons);
 
         assertCommandBehavior("listdue",
                 Command.getMessageForFeesListShownSummary(expectedList),
