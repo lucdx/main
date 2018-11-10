@@ -2,6 +2,7 @@ package seedu.addressbook.logic;
 
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.addressbook.common.Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK;
 import static seedu.addressbook.logic.CommandAssertions.assertCommandBehavior;
 import static seedu.addressbook.logic.CommandAssertions.assertInvalidIndexBehaviorForCommand;
@@ -66,13 +67,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeAddFeesCommandInvalidData() throws Exception {
+    public void execute_EditFees_InvalidData() throws Exception {
         assertCommandBehavior(
                 "editfees 2 1.111 01-01-2018", Fees.MESSAGE_FEES_CONSTRAINTS);
     }
 
     @Test
-    public void executeAddFeesSuccessful() throws Exception {
+    public void execute_EditFees_Successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -93,7 +94,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeAddFeesUpdateZero() throws Exception {
+    public void execute_EditFees_UpdateZero() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p2 = helper.generatePerson(2, true);
         Tag temp = new Tag("feesdue");
@@ -121,7 +122,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeAddFeesInvalidPerson() throws Exception {
+    public void execute_EditFees_InvalidPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
@@ -141,7 +142,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeListFeesSuccessful() throws Exception {
+    public void execute_EditFees_InvalidIndex() throws Exception {
+        assertCommandBehavior("editfees 0 12.12 01-01-2018",
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_ListFees_Successful() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expected = helper.generateAddressBook(false, true);
@@ -158,7 +165,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeListFeesEmpty() throws Exception {
+    public void execute_ListFees_Empty() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         List<? extends ReadOnlyPerson> expectedList = new ArrayList<>();
@@ -173,7 +180,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeListDueFeesSuccessful() throws Exception {
+    public void execute_ListDue_FeesSuccessful() throws Exception {
         // prepare expectations
         String date = java.time.LocalDate.now().toString();
         TestDataHelper helper = new TestDataHelper();
@@ -191,7 +198,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeListDueFeesWithUpdate() throws Exception {
+    public void execute_ListDueFees_WithUpdate() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -253,6 +260,32 @@ public class FeesCommandsTest {
                 expected,
                 true,
                 threePersons);
+    }
+
+    @Test
+    public void executePaidFeesInvalidPerson() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, false);
+        List<Person> lastShownList = helper.generatePersonList(p1, p2);
+
+        AddressBook expected = new AddressBook();
+        expected.addPerson(p1);
+
+        addressBook.addPerson(p1);
+        logic.setLastShownList(lastShownList);
+
+        assertCommandBehavior("paidfees 2",
+                MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expected,
+                false,
+                lastShownList);
+    }
+
+    @Test
+    public void executePaidFeesInvalidIndex() throws Exception {
+        assertCommandBehavior("paidfees 0",
+                MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
