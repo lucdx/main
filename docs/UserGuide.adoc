@@ -480,7 +480,7 @@ Example(s):
 
 ==== Removing the fees of a person: `paidfees` image:Admin.png[16,16]
 
-Removes the fees from a person, once he/she has paid, in the address book. +
+Removes the fees from a person, once he/she has paid in full, in the address book. +
 Format: `paidfees INDEX` +
 
 ****
@@ -489,9 +489,11 @@ The INDEX refers to the index number shown in the most recent person listing.
 ****
 
 Example(s):
+
 * `list` +
 `paidfees 2` +
-Removed fees from 2nd person in the address book.
+Fees of the 2nd person in the address book are now fully paid.
+
 
 ==== View fees of a person : `viewfees` image:Tutor.png[16,16]
 
