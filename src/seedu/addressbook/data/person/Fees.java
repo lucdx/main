@@ -28,7 +28,7 @@ public class Fees implements Printable {
         if (!isValidFees(fees)) {
             throw new IllegalValueException(MESSAGE_FEES_CONSTRAINTS);
         }
-        if (!Utils.isValidDate(date)) {
+        if (!isValidDate(date)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
         this.value = fees;
@@ -52,6 +52,14 @@ public class Fees implements Printable {
 
     public static boolean isValidFees(String test) {
         return test.matches(FEES_VALIDATION_REGEX);
+    }
+
+    /**
+     * Checks if a given string is a valid date.
+     *
+     */
+    public static boolean isValidDate(String test) {
+        return test.matches(DATE_VALIDATION_REGEX);
     }
 
     public boolean isPrivate() {
