@@ -44,7 +44,6 @@ public class TutorUser extends BasicUser {
             new ReplaceAttendanceCommand(),
             new ViewAttendancePersonCommand(),
             new ViewAttendanceDateCommand(),
-            new EditFeesCommand(),
             new ListFeesCommand(),
             new ListDueFeesCommand(),
             new AddAssessmentCommand(),
