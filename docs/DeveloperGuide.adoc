@@ -467,10 +467,19 @@ image::Assessment_Aspect_Example.png[width="800"]
 // end::Grades[]
 // tag::Fees[]
 === Fees Feature
+[[fig-FeesDiagram]]
+.Class Diagram of Fees
+image::FeesClassDiag.png[width="800"]
+
+Fees are an additional field to every `Person` object:
+
+. Each Person will have a Fees object
+. Fees contain both a String value as well as a String duedate
+. Users can thus check the Fees of a particular person, or list out all the fees of the Persons in the address book
 
 ==== Current Implementation
-A private attribute under the Person class is initialised when a Person is added to the AddressBook. This attribute holds 2 Strings, one being the monetary value of
-the fee and the other being the due date for the respective fee. The current set of commands include:
+An attribute under the Person class is initialised when a Person is added to the AddressBook. This attribute holds 2 Strings, one being the monetary value of
+the fee and the other being the duedate for that respective fee. The current set of commands include:
 
 . `Editing a Fee`
 . `Paying a Fee in full`
@@ -483,6 +492,12 @@ An Example of how command 1 - `Editing the Fee of a Person` works:
 . The admin will be able to use the 'editfees' command to add a new fee to the Person.
 . The existing fee with its date will be replaced by this new value in the Person object in the AddressBook.
 . The updated fees will then be store in the AddressBook and will be automatically private, only viewable by the admin and tutors.
+
+This is shown in the diagram below.
+
+[[fig-EditFeesSequenceDiagram]]
+.Sequence Diagram of EditFeesCommand
+image::EditFeesSequenceDiag.png[width="800"]
 
 ==== Design Considerations
 
