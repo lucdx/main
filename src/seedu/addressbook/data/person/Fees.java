@@ -42,7 +42,7 @@ public class Fees implements Printable {
      */
     public Fees() {
         this.value = "0.00";
-        this.duedate = "01-01-1970";
+        this.duedate = "00-00-0000";
     }
 
     /**
