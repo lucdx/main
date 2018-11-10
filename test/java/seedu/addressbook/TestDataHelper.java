@@ -243,7 +243,7 @@ public class TestDataHelper {
         StringJoiner cmd = new StringJoiner(" ");
         cmd.add("editfees");
         cmd.add("2");
-        cmd.add("123.45");
+        cmd.add("1.45");
         cmd.add("01-01-2018");
         return cmd.toString();
     }
