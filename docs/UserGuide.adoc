@@ -478,6 +478,21 @@ Example(s):
 * `list` +
 `editfees 2 0.60 01-01-2019`
 
+==== Removing the fees of a person: `paidfees` image:Admin.png[16,16]
+
+Removes the fees from a person, once he/she has paid, in the address book. +
+Format: `paidfees INDEX` +
+
+****
+Words in `UPPER_CASE` are the parameters.
+The INDEX refers to the index number shown in the most recent person listing.
+****
+
+Example(s):
+* `list` +
+`paidfees 2` +
+Removed fees from 2nd person in the address book.
+
 ==== View fees of a person : `viewfees` image:Tutor.png[16,16]
 
 Displays the fees(private) of the specified person. +
@@ -485,7 +500,7 @@ Format: `viewfees INDEX`
 
 ****
 Views the fees of the person at the specified `INDEX`.
-The index refers to the index number shown in the most recent person listing.
+The INDEX refers to the index number shown in the most recent person listing.
 ****
 
 Example(s):
