@@ -226,7 +226,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeListDueFeesEmpty() throws Exception {
+    public void execute_ListDueFees_Empty() throws Exception {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         List<? extends ReadOnlyPerson> expectedList = new ArrayList<>();
@@ -241,7 +241,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executePaidFeesSuccessful() throws Exception {
+    public void execute_PaidFees_Successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -263,7 +263,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executePaidFeesInvalidPerson() throws Exception {
+    public void execute_PaidFees_InvalidPerson() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
@@ -283,13 +283,13 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executePaidFeesInvalidIndex() throws Exception {
+    public void execute_PaidFees_InvalidIndex() throws Exception {
         assertCommandBehavior("paidfees 0",
                 MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
-    public void executeViewFeesCommandSuccessful() throws Exception {
+    public void execute_ViewFees_Successful() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -311,12 +311,12 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executeViewFeesCommandInvalidIndex() throws Exception {
+    public void execute_ViewFees_InvalidIndex() throws Exception {
         assertInvalidIndexBehaviorForCommand("viewfees");
     }
 
     @Test
-    public void executeViewFeesInvalidArgsFormat() throws Exception {
+    public void execute_ViewFees_InvalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewFeesCommand.MESSAGE_USAGE);
         assertCommandBehavior("viewfees ", expectedMessage);
         assertCommandBehavior("viewfees arg not number", expectedMessage);
