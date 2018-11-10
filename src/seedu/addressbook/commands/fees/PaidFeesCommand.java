@@ -26,7 +26,7 @@ public class PaidFeesCommand extends IndexFormatCommand {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Fees paid: %1$s";
-    public static final String MESSAGE_NO_FEES = "Person does not have any due Fees: %1s";
+    public static final String MESSAGE_NO_FEES = "%1s does not have any due Fees.";
 
     @Override
     public CommandResult execute() {
@@ -48,7 +48,7 @@ public class PaidFeesCommand extends IndexFormatCommand {
                             PersonListFormat.ALL_PUBLIC_DETAILS);
                 }
                 else {
-                    return new CommandResult(String.format(MESSAGE_NO_FEES, person.getAsTextShowFee()));
+                    return new CommandResult(String.format(MESSAGE_NO_FEES, person.getAsTextShowOnlyName()));
                 }
             } catch (PersonNotFoundException pnfe) {
                 return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
