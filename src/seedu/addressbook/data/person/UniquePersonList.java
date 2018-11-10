@@ -123,24 +123,15 @@ public class UniquePersonList implements Iterable<Person> {
      *
      */
     public List<ReadOnlyPerson> listdueFees(String date) {
-        //TODO: Fix messiness
         if (internalList.isEmpty()) {
             return Collections.unmodifiableList(internalList);
         }
         List<Person> copy = new ArrayList<>();
         for (Person p: internalList) {
             if (p.getFees().isEdited()) {
-                StringBuilder main1 = new StringBuilder();
-                StringBuilder main2 = new StringBuilder();
-                main1.append(p.getFees().duedate.substring(6, 10));
-                main1.append(p.getFees().duedate.substring(3, 5));
-                main1.append(p.getFees().duedate.substring(0, 2));
-                main2.append(date.substring(0, 4));
-                main2.append(date.substring(5, 7));
-                main2.append(date.substring(8, 10));
-                //System.out.println(main1.toString());
-                //System.out.println(main2.toString());
-                if (main1.toString().compareTo(main2.toString()) <= 0) {
+                String  p1 = Utils.convertToValidDateStringUser(p.getFees().duedate);
+                String currentDate = Utils.convertToValidDateStringSystem(date);
+                if (p1.compareTo(currentDate) <= 0) {
                     copy.add(p);
                     try {
                         Set<Tag> temp = new HashSet<>();

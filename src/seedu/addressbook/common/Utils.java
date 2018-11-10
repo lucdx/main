@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
 
 import seedu.addressbook.data.person.Person;
 
+import javax.print.DocFlavor;
+
 /**
  * Utility methods
  */
@@ -74,17 +76,34 @@ public class Utils {
      */
     public static class FeesComparator implements Comparator<Person> {
         @Override
-        public int compare(Person o1, Person o2) {
-            StringBuilder main1 = new StringBuilder();
-            StringBuilder main2 = new StringBuilder();
-            main1.append(o1.getFees().duedate.substring(6, 10));
-            main1.append(o1.getFees().duedate.substring(3, 5));
-            main1.append(o1.getFees().duedate.substring(0, 2));
-            main2.append(o2.getFees().duedate.substring(6, 10));
-            main2.append(o2.getFees().duedate.substring(3, 5));
-            main2.append(o2.getFees().duedate.substring(0, 2));
-            return main1.toString().compareTo
-                    (main2.toString());
+        public int compare(Person p1, Person p2) {
+            String person1 = convertToValidDateStringUser(p1.getFees().duedate);
+            String person2 = convertToValidDateStringUser(p2.getFees().duedate);
+            return person1.compareTo
+                    (person2);
         }
+    }
+
+    /**
+     * Date Converter to use for comparisons during Fees command
+     * Such as sorting and if dates have passed relative to User's current date.
+     */
+    public static String convertToValidDateStringUser (String value) {
+        StringBuilder result = new StringBuilder();
+        result.append(value.substring(6, 10));
+        result.append(value.substring(3, 5));
+        result.append(value.substring(0, 2));
+        return result.toString();
+    }
+
+    /**
+     * Date Converter for system date to String for comparison
+     */
+    public static String convertToValidDateStringSystem (String value) {
+        StringBuilder result = new StringBuilder();
+        result.append(value.substring(0, 4));
+        result.append(value.substring(5, 7));
+        result.append(value.substring(9, 10));
+        return result.toString();
     }
 }
