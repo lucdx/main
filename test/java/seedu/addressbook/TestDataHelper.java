@@ -54,9 +54,9 @@ public class TestDataHelper {
 
     /** Test fees for testing**/
     public Fees fees (int seed) throws Exception {
-        String test = seed + ".45";
-        String testdate = "01-0" + seed + "-2018";
-        return new Fees(test, testdate);
+        String value = seed + ".45";
+        String dueDate = "01-0" + seed + "-2018";
+        return new Fees(value, dueDate);
     }
 
     /** Test exam for testing**/

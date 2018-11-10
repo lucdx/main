@@ -27,14 +27,6 @@ public class PaidFeesCommand extends IndexFormatCommand {
 
     public static final String MESSAGE_SUCCESS = "Fees paid: %1$s";
 
-    /**
-     * Constructor used for Privileges
-     * Command constructed has no functionality
-     * */
-    //public PaidFeesCommand() {
-    // Does nothing
-    //}
-
     @Override
     public CommandResult execute() {
         try {

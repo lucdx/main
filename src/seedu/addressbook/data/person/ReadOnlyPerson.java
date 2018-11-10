@@ -161,9 +161,6 @@ public interface ReadOnlyPerson {
         if (getFees().isEdited()) {
             builder.append(Formatter.getPrintableString(true, getFees()));
         } else {
-            //builder.append("{private Fees: ");
-            //builder.append(getFees().value);
-            //builder.append(" / }\n");
             builder.append("No Fees owed!\n");
         }
         return builder.toString();

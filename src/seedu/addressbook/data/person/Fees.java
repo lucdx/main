@@ -18,13 +18,6 @@ public class Fees implements Printable {
     public final String duedate;
     private boolean isEdited = false;
 
-    //TODO hide the fees when it's first initialised as 00-00-0000
-    // new command for when they paid fees, fully, thus reinitiliasing as 00-00-0000
-    // so that it doesnt fail valid date check in edit fees
-    // therefore fees will always either be 00-00-0000 or a valid date,
-    // and will always be hidden when its 00-00-0000
-    // this way is easier as dont need to change all the adapted person and stuff
-
     /**
      * Validates given AdaptedFees.
      *
