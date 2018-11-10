@@ -129,7 +129,7 @@ public class UniquePersonList implements Iterable<Person> {
         List<Person> copy = new ArrayList<>();
         for (Person p: internalList) {
             if (p.getFees().isEdited()) {
-                String  p1 = Utils.convertToValidDateStringUser(p.getFees().duedate);
+                String p1 = Utils.convertToValidDateStringUser(p.getFees().duedate);
                 String currentDate = Utils.convertToValidDateStringSystem(date);
                 if (p1.compareTo(currentDate) <= 0) {
                     copy.add(p);

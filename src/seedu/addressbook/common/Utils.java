@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 import seedu.addressbook.data.person.Person;
 
-import javax.print.DocFlavor;
-
 /**
  * Utility methods
  */
