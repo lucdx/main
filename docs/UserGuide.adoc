@@ -471,6 +471,12 @@ Fees are automatically marked as `private`. `private` details can only
 be seen using the `viewall` command, or for fees specifically, the `viewfees` command.
 ****
 
+[NOTE]
+====
+*NOTE*: You MUST list persons first before using this command! +
+i.e. Indices are selected after first carrying out the any of the `list` commands.
+====
+
 Example(s):
 
 * `list` +
@@ -487,6 +493,12 @@ Format: `paidfees INDEX` +
 Words in `UPPER_CASE` are the parameters.
 The INDEX refers to the index number shown in the most recent person listing.
 ****
+
+[NOTE]
+====
+*NOTE*: You MUST list persons first before using this command! +
+i.e. Indices are selected after first carrying out the any of the `list` commands.
+====
 
 Example(s):
 
