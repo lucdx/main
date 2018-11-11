@@ -1,5 +1,6 @@
 package seedu.addressbook.logic;
 
+import static seedu.addressbook.commands.fees.ViewFeesCommand.MESSAGE_VIEWFEE_PERSON_SUCCESS;
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_FEES_VALUE_CONSTRAINTS;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -340,7 +341,8 @@ public class FeesCommandsTest {
         helper.addToAddressBook(addressBook, threePersons);
         logic.setLastShownList(threePersons);
         assertCommandBehavior("viewfees 2",
-                String.format(ViewFeesCommand.MESSAGE_VIEWFEE_PERSON_SUCCESS, p2.getAsTextShowFee()),
+                String.format(String.format(MESSAGE_VIEWFEE_PERSON_SUCCESS, p2.getName())),
+                p2.getAsTextShowFee(),
                 expected,
                 false,
                 threePersons,
