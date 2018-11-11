@@ -1,10 +1,8 @@
 package seedu.addressbook.data.person;
 
-import seedu.addressbook.common.Utils;
-import seedu.addressbook.data.exception.IllegalValueException;
-
 import static seedu.addressbook.common.Messages.MESSAGE_DATE_CONSTRAINTS;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Represents a Person's fees due in the address book.

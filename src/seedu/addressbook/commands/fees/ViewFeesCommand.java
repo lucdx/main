@@ -38,7 +38,8 @@ public class ViewFeesCommand extends IndexFormatCommand {
         try {
             final ReadOnlyPerson target = getTargetReadOnlyPerson();
             addressBook.findPerson(target);
-            return new CommandResult(String.format(MESSAGE_VIEWFEE_PERSON_SUCCESS, target.getName()), target.getAsTextShowFee());
+            return new CommandResult(String.format(MESSAGE_VIEWFEE_PERSON_SUCCESS, target.getName()),
+                    target.getAsTextShowFee());
 
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

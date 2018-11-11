@@ -46,8 +46,7 @@ public class PaidFeesCommand extends IndexFormatCommand {
                     List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
                     return new CommandResult(String.format(MESSAGE_SUCCESS, person.getAsTextShowFee()), allPersons,
                             PersonListFormat.ALL_PUBLIC_DETAILS);
-                }
-                else {
+                } else {
                     return new CommandResult(String.format(MESSAGE_NO_FEES, person.getAsTextShowOnlyName()));
                 }
             } catch (PersonNotFoundException pnfe) {
