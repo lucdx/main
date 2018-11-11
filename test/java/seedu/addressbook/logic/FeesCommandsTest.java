@@ -286,9 +286,9 @@ public class FeesCommandsTest {
         helper.addToAddressBook(addressBook, threePersons);
         logic.setLastShownList(threePersons);
         assertCommandBehavior("paidfees 2",
-                String.format(String.format(PaidFeesCommand.MESSAGE_SUCCESS, p2.getAsTextShowFee())),
+                String.format(String.format(PaidFeesCommand.MESSAGE_NO_FEES, p2.getAsTextShowOnlyName())),
                 expected,
-                true,
+                false,
                 threePersons);
     }
 
