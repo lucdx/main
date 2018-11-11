@@ -277,7 +277,7 @@ public class FeesCommandsTest {
     }
 
     @Test
-    public void executePaidFees_validData_successfulMessage() throws Exception {
+    public void executePaidFees_validDataNoFees_successfulMessage() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
@@ -293,6 +293,29 @@ public class FeesCommandsTest {
                 String.format(String.format(PaidFeesCommand.MESSAGE_NO_FEES, p2.getAsTextShowOnlyName())),
                 expected,
                 false,
+                threePersons,
+                true);
+    }
+
+    @Test
+    public void executePaidFees_validData_successfulMessage() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expected = helper.generateAddressBook(threePersons);
+        expected.findPerson(p2).setFees(helper.fees(1));
+
+        helper.addToAddressBook(addressBook, threePersons);
+        logic.setLastShownList(threePersons);
+
+        assertCommandBehavior("paidfees 2",
+                "Fees paid: Person 2\nNo Fees owed!\n",
+                expected,
+                true,
                 threePersons,
                 true);
     }
