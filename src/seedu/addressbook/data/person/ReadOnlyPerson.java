@@ -185,13 +185,27 @@ public interface ReadOnlyPerson {
      */
     default String getAsTextShowExam() {
         final StringBuilder builder = new StringBuilder();
+        for (Exam exam : getExams()) {
+            if (exam.isPrivate()) {
+                continue;
+            }
+            builder.append(exam).append("\n");
+        }
+        if (builder.toString().isEmpty()) {
+            builder.append(String.format(Messages.MESSAGE_NO_NON_PRIVATE_EXAMS, getName()));
+        }
+        return builder.toString();
+    }
+
+    /**
+     * Formats the person as text, showing name and all exams.
+     */
+    default String getAsTextShowAllExam() {
+        final StringBuilder builder = new StringBuilder();
         if (getExams().isEmpty()) {
-            builder.append(Messages.MESSAGE_NO_NON_PRIVATE_EXAMS);
+            builder.append(String.format(Messages.MESSAGE_NO_EXAMS, getName()));
         } else {
             for (Exam exam : getExams()) {
-                if (exam.isPrivate()) {
-                    continue;
-                }
                 builder.append(exam).append("\n");
             }
         }

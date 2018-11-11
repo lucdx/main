@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import seedu.addressbook.common.Pair;
 import seedu.addressbook.data.account.Account;
+import seedu.addressbook.data.person.Assessment;
 import seedu.addressbook.data.person.Exam;
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.formatter.Formatter;
@@ -165,6 +166,25 @@ public class FormatterTest {
         expected = "Exam: Exam 2 Subject 2 01-02-2018 10:00 12:00 Held in 2. Takers: 0";
         assertEquals(expected, Formatter.getPrintableExam(e2.getExamName(), e2.getSubjectName(), e2.getExamDate(),
                 e2.getExamStartTime(), e2.getExamEndTime(), e2.getExamDetails(), e2.getTakers(), e2.isPrivate()));
+    }
+
+    @Test
+    public void formatAssessment() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Assessment a1 = helper.generateAssessment(1);
+        String expected = "1";
+        assertEquals(expected, Formatter.getPrintableAssessment(a1.getExamName()));
+    }
+
+    @Test
+    public void formatListAssessments() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Assessment assessment1 = new Assessment(Integer.toString(1));
+        Assessment assessment2 = new Assessment(Integer.toString(2));
+        List<Assessment> assessmentList = helper.generateAssessmentsList(assessment1, assessment2);
+        final String assessmentFormat = " %1$d. %1$d" + NEWLINE;
+        String expected = String.format(assessmentFormat, 1) + String.format(assessmentFormat, 2) + " " + NEWLINE;
+        assertEquals(expected, Formatter.formatAssessments(assessmentList));
     }
 
     private void assertEmptyListShowsEmpty(PersonListFormat personListFormat) {

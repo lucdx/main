@@ -42,12 +42,6 @@ public class Person implements ReadOnlyPerson {
         this.fees = new Fees();
     }
 
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Account account, Set<Exam> exams) {
-        this(name, phone, email, address, tags, exams);
-        this.account = account;
-    }
-
     /**
      * Only update the fees when called in setAssessmentsCommand
      * Assumption: Every field must be present and not null.

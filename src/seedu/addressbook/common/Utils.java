@@ -15,6 +15,7 @@ import seedu.addressbook.data.person.Person;
  * Utility methods
  */
 public class Utils {
+    private static final String DATE_PATTERN = "dd-MM-yyyy";
 
     /**
      * Checks whether any of the given items are null.
@@ -57,8 +58,7 @@ public class Utils {
      */
     public static boolean isValidDate(String value) {
         boolean isValid;
-        final String format = "dd-MM-yyyy";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
         try {
             String parsedDate = LocalDate.parse(value, formatter).format(formatter);
             isValid = value.equals(parsedDate);
