@@ -207,10 +207,10 @@ public class Parser {
             return prepareVoidCommand(arguments, new ExamsListCommand());
 
         case ListFeesCommand.COMMAND_WORD:
-            return new ListFeesCommand();
+            return prepareVoidCommand(arguments, new ListFeesCommand());
 
         case ListDueFeesCommand.COMMAND_WORD:
-            return new ListDueFeesCommand();
+            return prepareVoidCommand(arguments, new ListDueFeesCommand());
 
         case DeleteExamCommand.COMMAND_WORD:
             return prepareSingleIndexCommand(arguments, new DeleteExamCommand(), ObjectTargeted.EXAM);
