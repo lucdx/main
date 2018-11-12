@@ -182,7 +182,7 @@ image::RegisterExam_Sequence_Diagram.png[width="1200"]
 
 // tag::privilege[]
 === Privilege/Account Feature
-The Privilege feature aims to only restrict the user's to their allowed commands, while the Account feature provides a means for the user to authenticate themselves to access more commands.
+The Privilege feature aims to only restrict the user's interaction to their allowed commands, while the Account feature provides a means for the user to authenticate himself/herself to access more commands.
 
 ---
 
@@ -306,7 +306,7 @@ and the grades for these assessments being stored in the AddressBook. The curren
 This is the class diagram for the assessments, grades and statistics combined:
 [[fig-AddAssessmentDiagram]]
 .Class Diagram
-image::assessmentClassDiagram.png[width="800"]
+image::AssessmentClassDiagram.png[width="800"]
 
 . A list of unique assessments can be stored in the addressbook.
 . Each assessment object contains a Hash Map, with Person as the Key and Grades as the Value. Hence, the grades of all
@@ -624,7 +624,7 @@ See <<UsingGradle#, UsingGradle.adoc>> for more info on how to run tests using G
 
 === Types of tests
 
-We have one type of test:
+We have 3 types of test:
 
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
@@ -1211,7 +1211,6 @@ Use case ends
 === Use case: Change master password
 [discrete]
 ==== Actor: Admin
-
 <<mss, *MSS*>>
 
 1. User requests to change the master password
@@ -1361,6 +1360,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
 === Use case: Adding Fees to a Person
 [discrete]
 ==== Actor: Admin
@@ -1374,7 +1374,6 @@ Use case ends.
 Use case ends.
 
 *Extensions*
-
 [none]
 * 1a. The list is empty. +
 ** 1a1. ClassRepo shows that the list is empty. +
@@ -1384,7 +1383,65 @@ Use case ends. +
 ** 3a1. ClassRepo shows an error message. +
 Use case ends.
 
-_{More to be added}_
+=== Use case: Taking attendance for student
+[discrete]
+==== Actor: Tutor
+<<mss, *MSS*>>
+
+1.  User requests to list people.
+2.  ClassRepo shows a list of people.
+3.  User request to update attendance of person with index x +
+4.  ClassRepo shows attendance of person with index x is updated +
+5.  User requests to change attendance of person with index x +
+6.  ClassRepo shows attendance of person with index x is replaced +
++
+Use case ends.
+
+*Extensions*
+[none]
+* 3a. User provided the invalid index. +
+** 3a1. ClassRepo shows an error message. +
+Use case ends.
+[none]
+* 3b. Person with index x already has attendance. +
+** 3b1. ClassRepo shows an error message and suggests to use the replaceAtten command. +
+Use case ends.
+[none]
+* 5a. User provided the invalid index. +
+** 5a1. ClassRepo shows an error message. +
+Use case ends.
+[none]
+* 5b. Person with index x does not have existing attendance. +
+** 5b1. ClassRepo shows an error message and suggests to use attendance command. +
+Use case ends.
+
+[discrete]
+=== Use case: Viewing of attendance
+[discrete]
+==== Actor: Tutor
+<<mss, *MSS*>>
+
+1.  User requests to view attendance of person with index x +
+2.  ClassRepo shows attendance of person with index x +
+3.  User request to view attendances of people for date y +
+4.  ClassRepo shows the lists of people who are present and absent for date y +
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User provided the invalid index. +
+** 1a1. ClassRepo shows an error message. +
+Use case ends.
+[none]
+* 3a. User provided the invalid index. +
+** 3a1. ClassRepo shows an error message. +
+Use case ends.
+[none]
+* 4b. User input invalid date. +
+** 4b1. ClassRepo shows an error message. +
+Use case ends.
 
 +++ </div></details> +++
 
@@ -1395,8 +1452,6 @@ _{More to be added}_
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be
 able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -1419,14 +1474,15 @@ The Main Success Scenario (MSS) describes the most straightforward interaction f
 [appendix]
 == Instructions for Manual Testing
 
-Given below are instructions to test the app manually.
+Given below are instructions to test the app manually. +
+Before reporting bugs, refer to <<UserGuide.adoc#known-issues, Known Issues>> to see the list of known issues that we deemed low priority to fix.
 
 [NOTE]
 These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
 
 === Loading sample data
 
-. Loading of sample data into program
+. Loading of sample data into the program
 
 .. Move the `jar` file into the working directory.
 .. Copy the sample data from the link:{repoURL}/sample_data[GitHub Repo] into the working directory.
@@ -1436,15 +1492,73 @@ These instructions only provide a starting point for testers to work on; testers
 
 . Initial launch
 
-.. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
    Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-. Saving window preferences
+The below image shows the different interactable interfaces
 
-.. Resize the window to an optimum size. Move the window to a different location. Close the window.
-.. Re-launch the app by double-clicking the jar file. +
-   Expected: The most recent window size and location are retained.
+.The different interfaces
+image::Interface.png[width="500"]
+
+   
+=== Privilege/Account Feature
+
+The account available in the sample data. Avoid modifying them to ensure smooth testing.
+[width="50%",cols="22%,<20%,<20%,<20%",options="header",]
+|=======================================================================
+|Person |Username |Password |Privilege
+|Filbert |fil_username |fil_password |Basic
+|Lira |lira_username |lira_password |Tutor
+|John Doe |john_the_admin |pw123 |Admin
+|=======================================================================
+The master password is `default_pw`.
+
+. Logging in
+
+.. Prerequisites: Not logged in.
+.. Test case: `login fil_username fil_password` +
+   `viewpri` +
+   `viewself` +
+   Expected: Login is successful. Viewpri/viewself shows correct details on both consoles. +
+   Other similar situations to try: Log in as a tutor/admin instead. +
+
+. Logging out
+
+.. Prerequisites: Logged in/have privilege to relinquish.
+.. Test case: `logout` +
+   `viewpri` +
+   `viewself` +
+   Expected: Logout is successful.  Viewpri shows updated details on the output console. Viewself shows error on the status console + 
+   
+.. Prerequisites: Not logged in/no privilege to relinquish.
+.. Test case: `logout`
+   Expected: Logout is unsuccessful, as shown in the status console. +
+   
+. Raising privilege
+.. Prerequisites: Not logged in.
+.. Test case: `raise default_pw` +
+   `viewpri` +
+   Expected: Raise privilege is successful. Viewpri shows updated privileges +
+   
+. Accessing a command without sufficient privilege level
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Not logged in or logged in as student.
+.. Test case: `delete 1` +
+   `delete 1` +
+   Expected: No person is deleted. Error details shown in the status console. Output console remains the same. +
+   Other similar situations to try: Log in as a tutor instead. +
+
+. Accessing a command with sufficient privilege level
+
+.. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Privilege is Admin, either by logging in or raising privileges.
+.. Test case: `delete 1` +
+   Expected: 1st person in the list deleted. Status console shows success message. Output console shows updated list.
+   
+   .. Test case: `help` +
+   Expected: Output console shows the list of runnable commands given the current privilege level.
+   
+.. Other commands to try: For full list of commands testable, refer to <<UserGuide.adoc#command-summary, Command Summary>> +
+   Expected: Commands execute only if the privilege level is sufficient.
 
 === Deleting a person
 
@@ -1454,21 +1568,10 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `delete 1` +
    Expected: First contact is deleted from the list. Details of the deleted contact shown in the status console. List in the output console is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status console. Output console remains the same.
+   Expected: No person is deleted. Error details are shown in the status console. Output console remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a` (where a is not an integer) +
    Expected: Similar to previous.
 .. Other similar commands to try: `deletexam`, `deleteassess` +
-   Expected: Similar to previous.   
-   
-=== Accessing a command of different privilege level
-
-. Accessing a command of different privilege level than of current user
-
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list. Not logged in or logged in as student.
-.. Test case: `delete 1` +
-   Expected: No person is deleted. Error details shown in the status console. Output console remains the same.
-.. Other commands of different privilege to try: `listexams`, `listall`, `deleteexam 1` +
-   Expected: Similar to previous.
 
 === Adding a duplicate person
 
@@ -1478,10 +1581,10 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` +
    Expected: Contact is added to the list. Details of the added contact shown in the status console. List in the output console is updated.
 .. Test case: `add John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney` after the previous test case was performed. +
-   Expected: No person is added. Error details shown in the status console. Output console remains the same.
+   Expected: No person is added. Error details are shown in the status console. Output console remains the same.
 .. Other similar commands to try: `addexam`, `addassess` +
-   Expected: Similar to previous.   
-    
+   Expected: Similar to previous.
+
 === Registering a person for an exam
 
 . Register a person in the addressbook for an exam in the exambook
@@ -1490,7 +1593,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `regexam 1 1` +
    Expected: Exam is added to person. Status console shows success message. Output console displays the exams of person.
 .. Test case: `regexam 1 1` after the previous test case was performed. +
-   Expected: Exam is not added. Error details shown in the status console. Output console remains the same.
+   Expected: Exam is not added. Error details are shown in the status console. Output console remains the same.
 .. Other similar commands to try: `addassess`, `addstatistics` +
    Expected: Similar to previous.
 
@@ -1502,7 +1605,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `deregexam 1 1` +
    Expected: Exam is removed from person. Status console shows success message. Output console displays the exams of person.
 .. Test case: `deregexam 1 1` after the previous test case was performed. +
-   Expected: Exam is not removed. Error details shown in the status console. Output console remains the same.
+   Expected: Exam is not removed. Error details are shown in the status console. Output console remains the same.
 
 === Editing an exam
 
@@ -1512,13 +1615,13 @@ These instructions only provide a starting point for testers to work on; testers
 .. Test case: `editexam 1 p/n` +
    Expected: Exam is edited. Status console shows success message. Output console displays the updated list of exams.
 .. Test case: `editexam 1 p/n` after the previous test case was performed. +
-   Expected: Exam is not edited. Error details shown in the status console. Output console remains the same.
-   
+   Expected: Exam is not edited. Error details are shown in the status console. Output console remains the same.
+
 === Viewing exams as a student
 
 . View non-private exams in a student account
 
-.. Prerequisites: Logged in with a student account of the 1st person in the AddressBook. AddressBook has mutiple persons.
+.. Prerequisites: Logged in with a student account of the 1st person in the AddressBook. AddressBook has multiple persons.
 .. Test case: `viewexams 1` +
    Expected: Status console shows success message. Output console displays the list of non-private exams of the 1st person in the AddressBook.
 .. Test case: `viewexams 2` +
