@@ -14,13 +14,11 @@ image::Ui.png[width="600"]
 * The application manages and facilitates data entry and viewing for a secondary school database.
 * Students, tutors and admins can access information with increasing privileges respectively.
 
-*What's in Version 1.4*
 
 * A simple GUI added to replace the Text UI.
-* A `Logic` class added together with a `LogicTest` class.
 * Appendices added to <<DeveloperGuide#, Developer Guide>>
 
-*`5 Features` added from each <<AboutUs#, team member>> listed below*
+*`5 Key Features` implemented by each <<AboutUs#, team member>> listed below*
 
 * Account Authentication.
 * Attendance Tracking.
