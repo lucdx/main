@@ -1366,9 +1366,22 @@ Use case ends.
 ==== Actor: Admin
 <<mss, *MSS*>>
 
-1.  User requests to view his privilege
-2.  ClassRepo shows the privilege level and the account the user is logged in as
+1.  User requests to list all the students in the address book +
+2.  ClassRepo shows all the current students in the console +
+3.  User requests to edit fees of a student to a certain value +
+4.  ClassRepo shows the new Fees values of the student +
 +
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The list is empty. +
+** 1a1. ClassRepo shows that the list is empty. +
+Use case ends. +
+[none]
+* 3a. The person to edit fees for does not exist. +
+** 3a1. ClassRepo shows an error message. +
 Use case ends.
 
 _{More to be added}_
