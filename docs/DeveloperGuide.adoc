@@ -1572,6 +1572,7 @@ The master password is `default_pw`.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a` (where a is not an integer) +
    Expected: Similar to previous.
 .. Other similar commands to try: `deletexam`, `deleteassess` +
+   Expected: Similar to previous.
 
 === Adding a duplicate person
 
