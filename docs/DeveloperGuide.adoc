@@ -1225,6 +1225,17 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Adding Fees to a Person
+[discrete]
+==== Actor: Admin
+<<mss, *MSS*>>
+
+1.  User requests to view his privilege
+2.  ClassRepo shows the privilege level and the account the user is logged in as
++
+Use case ends.
+
 _{More to be added}_
 
 +++ </div></details> +++
