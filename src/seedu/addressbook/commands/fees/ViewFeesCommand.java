@@ -50,7 +50,7 @@ public class ViewFeesCommand extends IndexFormatCommand {
 
     @Override
     public boolean isMutating() {
-        return true;
+        return false;
     }
 
     @Override
