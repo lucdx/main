@@ -14,14 +14,14 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.details.Name;
 
 /**
- *  Lists down the people who were present on the particular date.
+ *  Lists all the people who were present on a particular date.
  */
 public class ViewAttendanceDateCommand extends Command {
 
     public static final String COMMAND_WORD = "viewAttenDate";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Views the attendance of the date. \n"
-            + "Parameters: d/date \n"
+            + "Parameters: d/DD-MM-YYYY \n"
             + "\tExample: " + COMMAND_WORD + " " + "d/28-10-2018";
     public static final String MESSAGE_SUCCESS = "Attendance for the given date, ";
 

@@ -8,14 +8,14 @@ import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.UniquePersonList;
 
 /**
- *  Lists down the dates where the person's attendance has been taken.
+ *  Lists all the dates where the person's attendance has been taken.
  */
 public class ViewAttendancePersonCommand extends IndexFormatCommand {
 
     public static final String COMMAND_WORD = "viewAttenPerson";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Views the attendance of a student. \n"
-            + "Parameters: indexOfStudent \n"
+            + "Parameters: INDEX \n"
             + "\tExample: " + COMMAND_WORD + " " + "1";
 
     public static final String MESSAGE_SUCCESS = "Attendance for student, ";
